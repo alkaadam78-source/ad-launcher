@@ -37,18 +37,20 @@ fn main() {
                         }
                     };
                     let (tx, rx) = std::sync::mpsc::channel();
-                    std::thread::spawn(move || {
+                    let handle = std::thread::spawn(move || {
                         while let Ok(event) = rx.recv() {
                             match event {
                                 core::process::ProcessEvent::LogLine(line) => println!("{}", line),
                                 core::process::ProcessEvent::Started(pid) => {
-                                    println!("[NUX] Process started with PID {}", pid)
+                                    println!("[NUX] Minecraft Process started with PID {}", pid)
                                 }
                                 core::process::ProcessEvent::Finished(code) => {
-                                    println!("[NUX] Process finished with exit code {}", code)
+                                    println!("[NUX] Minecraft Process finished with exit code {}", code);
+                                    break;
                                 }
                                 core::process::ProcessEvent::Crashed(err) => {
-                                    eprintln!("[NUX CRASH] {}", err)
+                                    eprintln!("[NUX CRASH] {}", err);
+                                    break;
                                 }
                             }
                         }
@@ -56,6 +58,7 @@ fn main() {
                     if let Err(e) = core.launch_current(tx).await {
                         eprintln!("[NUX] Launch error: {}", e);
                     }
+                    let _ = handle.join();
                 });
                 return;
             }

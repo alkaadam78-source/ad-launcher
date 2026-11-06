@@ -90,38 +90,10 @@ impl MinecraftEngine {
         // Add client jar
         classpath.push(client_jar_path);
 
-        // 4. Fabric Loader integration (if instance loader is fabric)
-        let main_class = if instance.loader == "fabric" {
-            // Check if Fabric loader profile exists or if fabric libraries exist in libraries/net/fabricmc
-            let fabric_profile_path = self
-                .minecraft_dir
-                .join("versions")
-                .join(format!("fabric-loader-{}", instance.mc_version))
-                .join(format!("fabric-loader-{}.json", instance.mc_version));
-
-            // Also check alternate Fabric profiles in versions/
-            let alt_fabric = self.find_existing_fabric_version(version_id);
-
-            if let Some(fabric_path) = alt_fabric.or_else(|| {
-                if fabric_profile_path.exists() {
-                    Some(fabric_profile_path)
-                } else {
-                    None
-                }
-            }) {
-                self.merge_fabric_profile(&fabric_path, &mut classpath)?;
-            }
-
-            // Fabric knot main class
-            "net.fabricmc.loader.impl.launch.knot.KnotClient".to_string()
-        } else {
-            pkg.main_class.clone()
-        };
-
-        // 5. Build JVM arguments
+        // 4. Build JVM arguments
         let mut jvm_args = Vec::new();
         let ram_mb = instance.ram_mb.max(1024);
-        jvm_args.push(format!("-Xms512M"));
+        jvm_args.push("-Xms512M".to_string());
         jvm_args.push(format!("-Xmx{}M", ram_mb));
 
         // GC & Memory optimization for i3-7100U + 8GB Debian Linux
@@ -143,6 +115,34 @@ impl MinecraftEngine {
 
         // Linux display integration & Wayland/X11 compatibility flags
         jvm_args.push("-Dorg.lwjgl.opengl.Display.enableOSX=false".to_string());
+
+        // 5. Fabric Loader integration (if instance loader is fabric)
+        let main_class = if instance.loader == "fabric" {
+            // Check if Fabric loader profile exists or if fabric libraries exist in libraries/net/fabricmc
+            let fabric_profile_path = self
+                .minecraft_dir
+                .join("versions")
+                .join(format!("fabric-loader-{}", instance.mc_version))
+                .join(format!("fabric-loader-{}.json", instance.mc_version));
+
+            // Also check alternate Fabric profiles in versions/
+            let alt_fabric = self.find_existing_fabric_version(version_id);
+
+            if let Some(fabric_path) = alt_fabric.or_else(|| {
+                if fabric_profile_path.exists() {
+                    Some(fabric_profile_path)
+                } else {
+                    None
+                }
+            }) {
+                self.merge_fabric_profile(&fabric_path, &mut classpath, &mut jvm_args)?;
+            }
+
+            // Fabric knot main class
+            "net.fabricmc.loader.impl.launch.knot.KnotClient".to_string()
+        } else {
+            pkg.main_class.clone()
+        };
 
         // 6. Build Game arguments
         let mut game_args = Vec::new();
@@ -211,17 +211,24 @@ impl MinecraftEngine {
             })
     }
 
-    fn find_existing_fabric_version(&self, _mc_version: &str) -> Option<PathBuf> {
+    fn find_existing_fabric_version(&self, mc_version: &str) -> Option<PathBuf> {
         let versions_dir = self.minecraft_dir.join("versions");
         if let Ok(entries) = std::fs::read_dir(versions_dir) {
+            let mut candidates = Vec::new();
             for entry in entries.flatten() {
                 let name = entry.file_name().to_string_lossy().to_string();
                 if name.contains("Fabric") || name.contains("fabric-loader") {
                     let json_path = entry.path().join(format!("{}.json", name));
                     if json_path.exists() {
-                        return Some(json_path);
+                        if name.contains(mc_version) {
+                            return Some(json_path);
+                        }
+                        candidates.push(json_path);
                     }
                 }
+            }
+            if let Some(first) = candidates.into_iter().next() {
+                return Some(first);
             }
         }
         None
@@ -231,6 +238,7 @@ impl MinecraftEngine {
         &self,
         fabric_json_path: &Path,
         classpath: &mut Vec<PathBuf>,
+        jvm_args: &mut Vec<String>,
     ) -> Result<(), String> {
         let content = std::fs::read_to_string(fabric_json_path)
             .map_err(|e| format!("Failed to read Fabric profile: {}", e))?;
@@ -252,6 +260,24 @@ impl MinecraftEngine {
                         let lib_path = libs_dir.join(group).join(artifact).join(version).join(jar_name);
                         if lib_path.exists() && !classpath.contains(&lib_path) {
                             classpath.insert(0, lib_path); // Fabric loader jars should be first in classpath
+                        }
+                    }
+                }
+            }
+        }
+
+        if let Some(args) = json["arguments"]["jvm"].as_array() {
+            for arg in args {
+                if let Some(s) = arg.as_str() {
+                    let trimmed = s.trim();
+                    if !trimmed.is_empty() {
+                        let cleaned = if trimmed.starts_with("-D") {
+                            trimmed.replace("= ", "=").replace(" =", "=")
+                        } else {
+                            trimmed.to_string()
+                        };
+                        if !jvm_args.contains(&cleaned) {
+                            jvm_args.push(cleaned);
                         }
                     }
                 }
