@@ -113,7 +113,14 @@ impl ShaderManager {
 
     pub fn analyze_compatibility(name: &str) -> (&'static str, &'static str, ShaderTier, &'static str) {
         let lower = name.to_lowercase();
-        if lower.contains("miniature") {
+        if lower.contains("zerolag") || lower.contains("50x") || lower.contains("ad-potato") {
+            (
+                "★ 100% 50X ZERO-LAG KING (ULTRA COLD)",
+                "180 - 240+ FPS",
+                ShaderTier::PotatoFriendly,
+                "Custom rewritten GLSL architecture. Zero shadow pass, analytical directional sun, single-pass pipeline. Silent fan & icy cold CPU/GPU!",
+            )
+        } else if lower.contains("miniature") {
             (
                 "★ 98% POTATO CHAMPION (EXCELLENT)",
                 "90 - 130 FPS",
