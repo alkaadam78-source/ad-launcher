@@ -73,6 +73,7 @@ fn main() {
 
     app.connect_startup(|_| {
         load_css();
+        gtk4::Window::set_default_icon_name("ad-launcher");
     });
 
     app.connect_activate(|app| {

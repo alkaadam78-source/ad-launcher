@@ -18,16 +18,30 @@ impl InstancesView {
         let container = GtkBox::new(Orientation::Vertical, 16);
         container.set_css_classes(&["content-area"]);
 
-        let title = Label::new(Some("INSTANCES & PROFILES"));
+        // Page Header
+        let header_row = GtkBox::new(Orientation::Horizontal, 12);
+        let title_col = GtkBox::new(Orientation::Vertical, 2);
+
+        let title = Label::new(Some("📚 MINECRAFT LIBRARY"));
         title.set_css_classes(&["page-title"]);
         title.set_halign(gtk4::Align::Start);
 
-        let subtitle = Label::new(Some("Manage isolated game configurations and modpacks"));
+        let subtitle = Label::new(Some("Game Versions, Fabric Loaders, Custom Instances & Fast Launcher"));
         subtitle.set_css_classes(&["page-subtitle"]);
         subtitle.set_halign(gtk4::Align::Start);
 
-        container.append(&title);
-        container.append(&subtitle);
+        title_col.append(&title);
+        title_col.append(&subtitle);
+        header_row.append(&title_col);
+
+        let credit_badge = Label::new(Some("⚡ CREDIT BY ADAMDEVNOOB ⚡"));
+        credit_badge.set_css_classes(&["adam-credit-badge"]);
+        credit_badge.set_halign(gtk4::Align::End);
+        credit_badge.set_hexpand(true);
+        credit_badge.set_valign(gtk4::Align::Center);
+        header_row.append(&credit_badge);
+
+        container.append(&header_row);
 
         // Instance creation card
         let form_card = GtkBox::new(Orientation::Vertical, 10);

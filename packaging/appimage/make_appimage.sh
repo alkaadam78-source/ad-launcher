@@ -3,13 +3,17 @@ set -e
 HERE="$(dirname "$(readlink -f "$0")")"
 PROJECT_ROOT="$(dirname "$(dirname "$HERE")")"
 APPDIR="$HERE/AppDir"
-OUTPUT="$PROJECT_ROOT/nux-launcher-1.0.0.AppImage"
+OUTPUT="$PROJECT_ROOT/ad-launcher-1.0.0.AppImage"
+SQFS="$PROJECT_ROOT/ad-launcher-1.0.0.squashfs"
 
-# Create self-extracting script header
+rm -f "$SQFS" "$OUTPUT"
+mksquashfs "$APPDIR" "$SQFS" -root-owned -noappend -comp xz
+
+# Create self-extracting AppImage bundle
 cat << 'HEADER' > "$OUTPUT"
 #!/bin/bash
 set -e
-TMPDIR=$(mktemp -d /tmp/nux-launcher-XXXXXX)
+TMPDIR=$(mktemp -d /tmp/ad-launcher-XXXXXX)
 trap 'rm -rf "$TMPDIR"' EXIT
 sed -e '1,/^__SQUASHFS_CONTENT__/d' "$0" > "$TMPDIR/app.sqfs"
 if command -v unsquashfs >/dev/null 2>&1; then
@@ -23,6 +27,7 @@ exit 0
 __SQUASHFS_CONTENT__
 HEADER
 
-cat "$PROJECT_ROOT/nux-launcher-1.0.0.squashfs" >> "$OUTPUT"
+cat "$SQFS" >> "$OUTPUT"
+rm -f "$SQFS"
 chmod +x "$OUTPUT"
 ls -lh "$OUTPUT"

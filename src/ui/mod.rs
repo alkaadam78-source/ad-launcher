@@ -1,15 +1,23 @@
 pub mod about;
 pub mod account;
+pub mod compatibility_lab;
 pub mod downloads;
 pub mod home;
 pub mod instances;
 pub mod mods;
+pub mod performance_center;
 pub mod settings;
+pub mod shader_center;
+pub mod storage_intelligence;
 
 pub use about::AboutView;
 pub use account::AccountView;
+pub use compatibility_lab::CompatibilityLabView;
 pub use downloads::DownloadsView;
 pub use home::HomeView;
 pub use instances::InstancesView;
 pub use mods::ModsView;
+pub use performance_center::PerformanceCenterView;
 pub use settings::SettingsView;
+pub use shader_center::ShaderCenterView;
+pub use storage_intelligence::StorageIntelligenceView;

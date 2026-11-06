@@ -24,6 +24,10 @@ impl HomeView {
         // Page Header
         let header_row = GtkBox::new(Orientation::Horizontal, 12);
         
+        let logo_img = gtk4::Image::from_icon_name("ad-launcher");
+        logo_img.set_pixel_size(48);
+        header_row.append(&logo_img);
+
         let title_col = GtkBox::new(Orientation::Vertical, 2);
         let title = Label::new(Some("⚡ AD LAUNCHER"));
         title.set_css_classes(&["page-title"]);
