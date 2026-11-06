@@ -1,0 +1,11 @@
+Package: nux-launcher
+Version: 1.0.0
+Section: games
+Priority: optional
+Architecture: amd64
+Maintainer: Antigravity Engineering <alz@debian.local>
+Depends: libc6 (>= 2.34), libgtk-4-1 (>= 4.12.0), default-jre | openjdk-17-jre | openjdk-21-jre
+Description: NUX Launcher Linux - Personal Edition
+ High-performance native Rust Minecraft launcher optimized for Debian Linux.
+ Features official Mojang manifest integration, Fabric, Sodium, Iris,
+ Modrinth mod search, and Microsoft OAuth 2.0 Device Code authentication.

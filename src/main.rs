@@ -1,0 +1,81 @@
+use nux_launcher::app::{load_css, MainWindow, APP_ID};
+use nux_launcher::core;
+use gtk4::prelude::*;
+use gtk4::Application;
+use std::env;
+
+fn main() {
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+
+    let args: Vec<String> = env::args().collect();
+    if args.len() > 1 {
+        match args[1].as_str() {
+            "--version" | "-v" => {
+                println!("nux-launcher {}", env!("CARGO_PKG_VERSION"));
+                println!("Linux Personal Edition (Debian x86_64)");
+                return;
+            }
+            "--help" | "-h" => {
+                println!("NUX Launcher Linux — Personal Edition");
+                println!("Usage: nux-launcher [OPTIONS]");
+                println!();
+                println!("Options:");
+                println!("  -v, --version    Show launcher version");
+                println!("  -h, --help       Show this help message");
+                println!("  --launch         Launch the default Minecraft instance directly");
+                return;
+            }
+            "--launch" => {
+                println!("[NUX] Launching active Minecraft instance directly...");
+                let rt = tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime");
+                rt.block_on(async {
+                    let mut core = match core::LauncherCore::init() {
+                        Ok(c) => c,
+                        Err(e) => {
+                            eprintln!("Error initializing launcher: {}", e);
+                            return;
+                        }
+                    };
+                    let (tx, rx) = std::sync::mpsc::channel();
+                    std::thread::spawn(move || {
+                        while let Ok(event) = rx.recv() {
+                            match event {
+                                core::process::ProcessEvent::LogLine(line) => println!("{}", line),
+                                core::process::ProcessEvent::Started(pid) => {
+                                    println!("[NUX] Process started with PID {}", pid)
+                                }
+                                core::process::ProcessEvent::Finished(code) => {
+                                    println!("[NUX] Process finished with exit code {}", code)
+                                }
+                                core::process::ProcessEvent::Crashed(err) => {
+                                    eprintln!("[NUX CRASH] {}", err)
+                                }
+                            }
+                        }
+                    });
+                    if let Err(e) = core.launch_current(tx).await {
+                        eprintln!("[NUX] Launch error: {}", e);
+                    }
+                });
+                return;
+            }
+            _ => {}
+        }
+    }
+
+    let app = Application::builder()
+        .application_id(APP_ID)
+        .build();
+
+    app.connect_startup(|_| {
+        load_css();
+    });
+
+    app.connect_activate(|app| {
+        let win = MainWindow::new(app);
+        win.window.present();
+    });
+
+    let empty_args: [&str; 0] = [];
+    app.run_with_args(&empty_args);
+}
