@@ -36,6 +36,25 @@ impl MinecraftProcess {
         let mut cmd = Command::new(&config.java_binary);
         cmd.current_dir(&config.game_dir);
 
+        // Hyper-Optimized Linux Mesa & OpenGL Driver Settings (Credit By AdamDevnoob)
+        cmd.env("mesa_glthread", "true");
+        cmd.env("vblank_mode", "0");
+        cmd.env("MESA_GL_VERSION_OVERRIDE", "4.6");
+        cmd.env("MESA_GLSL_VERSION_OVERRIDE", "460");
+        cmd.env("allow_higher_compat_version", "true");
+        cmd.env("INTEL_DEBUG", "norbc");
+
+        // Forward display environment variables if set
+        if let Ok(val) = std::env::var("DISPLAY") {
+            cmd.env("DISPLAY", val);
+        }
+        if let Ok(val) = std::env::var("WAYLAND_DISPLAY") {
+            cmd.env("WAYLAND_DISPLAY", val);
+        }
+        if let Ok(val) = std::env::var("XDG_RUNTIME_DIR") {
+            cmd.env("XDG_RUNTIME_DIR", val);
+        }
+
         // Add JVM arguments
         for arg in &config.jvm_args {
             cmd.arg(arg);

@@ -22,16 +22,41 @@ impl HomeView {
         container.set_css_classes(&["content-area"]);
 
         // Page Header
-        let title = Label::new(Some("NUX LAUNCHER LINUX"));
+        let header_row = GtkBox::new(Orientation::Horizontal, 12);
+        
+        let title_col = GtkBox::new(Orientation::Vertical, 2);
+        let title = Label::new(Some("⚡ AD LAUNCHER"));
         title.set_css_classes(&["page-title"]);
         title.set_halign(gtk4::Align::Start);
 
-        let subtitle = Label::new(Some("Personal Edition — Optimized for Debian Linux & Intel HD 620"));
+        let subtitle = Label::new(Some("Extreme Potato & Cartoon Edition — Ultra Boosted for Intel HD 620"));
         subtitle.set_css_classes(&["page-subtitle"]);
         subtitle.set_halign(gtk4::Align::Start);
 
-        container.append(&title);
-        container.append(&subtitle);
+        title_col.append(&title);
+        title_col.append(&subtitle);
+        header_row.append(&title_col);
+
+        let credit_badge = Label::new(Some("⚡ CREDIT BY ADAMDEVNOOB ⚡"));
+        credit_badge.set_css_classes(&["adam-credit-badge"]);
+        credit_badge.set_halign(gtk4::Align::End);
+        credit_badge.set_hexpand(true);
+        credit_badge.set_valign(gtk4::Align::Center);
+        header_row.append(&credit_badge);
+
+        container.append(&header_row);
+
+        // Turbo Feature Banner Card
+        let turbo_banner = GtkBox::new(Orientation::Horizontal, 12);
+        turbo_banner.set_css_classes(&["banner-card"]);
+        let turbo_icon = Label::new(Some("🚀"));
+        turbo_icon.set_css_classes(&["page-title"]);
+        let turbo_text = Label::new(Some("ADAM TURBO BOOST ENGAGED: Multi-threaded OpenGL + Potato Shaders + Zero-Stutter G1GC"));
+        turbo_text.set_css_classes(&["banner-title"]);
+        turbo_text.set_wrap(true);
+        turbo_banner.append(&turbo_icon);
+        turbo_banner.append(&turbo_text);
+        container.append(&turbo_banner);
 
         // Instance & Launch Card
         let launch_card = GtkBox::new(Orientation::Vertical, 12);
@@ -62,7 +87,7 @@ impl HomeView {
         let btn_box = GtkBox::new(Orientation::Horizontal, 12);
         btn_box.set_margin_top(8);
 
-        let play_button = Button::with_label("▶  LAUNCH MINECRAFT 1.20.1");
+        let play_button = Button::with_label("🔥 LAUNCH MINECRAFT 1.20.1 (TURBO BOOST) 🔥");
         play_button.set_css_classes(&["btn-play"]);
         play_button.set_hexpand(true);
         btn_box.append(&play_button);

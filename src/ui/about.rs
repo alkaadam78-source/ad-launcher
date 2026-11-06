@@ -11,16 +11,29 @@ impl AboutView {
         let container = GtkBox::new(Orientation::Vertical, 16);
         container.set_css_classes(&["content-area"]);
 
-        let title = Label::new(Some("ABOUT NUX LAUNCHER LINUX"));
+        let title = Label::new(Some("⚡ ABOUT AD LAUNCHER"));
         title.set_css_classes(&["page-title"]);
         title.set_halign(gtk4::Align::Start);
 
-        let subtitle = Label::new(Some("Personal Edition — Native Rust Desktop Launcher for Debian"));
+        let subtitle = Label::new(Some("Extreme Potato Edition — Cartoon Brutalism & Ultra FPS Booster"));
         subtitle.set_css_classes(&["page-subtitle"]);
         subtitle.set_halign(gtk4::Align::Start);
 
         container.append(&title);
         container.append(&subtitle);
+
+        // Creator Banner Card
+        let creator_card = GtkBox::new(Orientation::Vertical, 8);
+        creator_card.set_css_classes(&["banner-card"]);
+        let c_title = Label::new(Some("⚡ CREATED & OPTIMIZED BY ADAMDEVNOOB ⚡"));
+        c_title.set_css_classes(&["banner-title"]);
+        c_title.set_halign(gtk4::Align::Start);
+        let c_desc = Label::new(Some("Engineered with passion for high FPS Minecraft gaming on integrated GPUs (Intel HD 620) with lightweight shaders, multi-threaded Mesa OpenGL, and low-latency garbage collection."));
+        c_desc.set_wrap(true);
+        c_desc.set_halign(gtk4::Align::Start);
+        creator_card.append(&c_title);
+        creator_card.append(&c_desc);
+        container.append(&creator_card);
 
         // System Specs Card
         let specs_card = GtkBox::new(Orientation::Vertical, 10);

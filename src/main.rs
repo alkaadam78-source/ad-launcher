@@ -11,22 +11,23 @@ fn main() {
     if args.len() > 1 {
         match args[1].as_str() {
             "--version" | "-v" => {
-                println!("nux-launcher {}", env!("CARGO_PKG_VERSION"));
-                println!("Linux Personal Edition (Debian x86_64)");
+                println!("Ad Launcher {}", env!("CARGO_PKG_VERSION"));
+                println!("Credit By AdamDevnoob — Extreme Potato Edition (Debian x86_64)");
                 return;
             }
             "--help" | "-h" => {
-                println!("NUX Launcher Linux — Personal Edition");
-                println!("Usage: nux-launcher [OPTIONS]");
+                println!("Ad Launcher Linux — Credit By AdamDevnoob");
+                println!("Usage: ad-launcher [OPTIONS] / nux-launcher [OPTIONS]");
                 println!();
                 println!("Options:");
-                println!("  -v, --version    Show launcher version");
+                println!("  -v, --version    Show launcher version and credits");
                 println!("  -h, --help       Show this help message");
                 println!("  --launch         Launch the default Minecraft instance directly");
                 return;
             }
             "--launch" => {
-                println!("[NUX] Launching active Minecraft instance directly...");
+                println!("[AD LAUNCHER] Launching Minecraft with Adam Turbo Engine...");
+                println!("[AD LAUNCHER] Credit By AdamDevnoob");
                 let rt = tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime");
                 rt.block_on(async {
                     let mut core = match core::LauncherCore::init() {

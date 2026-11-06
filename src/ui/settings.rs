@@ -9,6 +9,7 @@ pub struct SettingsView {
     pub container: GtkBox,
     pub balanced_btn: Button,
     pub low_res_btn: Button,
+    pub hyper_btn: Button,
     pub ram_scale: Scale,
     pub ram_display_label: Label,
     pub java_entry: Entry,
@@ -55,16 +56,21 @@ impl SettingsView {
         preset_card.append(&p_desc);
 
         let btn_row = GtkBox::new(Orientation::Horizontal, 12);
-        let balanced_btn = Button::with_label("★ BALANCED (3 GB RAM, 6 Chunks)");
-        balanced_btn.set_css_classes(&["btn-primary"]);
+        let balanced_btn = Button::with_label("★ BALANCED (3 GB, 6 Chunks)");
+        balanced_btn.set_css_classes(&["btn-secondary"]);
         balanced_btn.set_hexpand(true);
 
-        let low_res_btn = Button::with_label("⚡ LOW RESOURCE (2 GB RAM, 4 Chunks)");
+        let low_res_btn = Button::with_label("⚡ LOW (2 GB, 4 Chunks)");
         low_res_btn.set_css_classes(&["btn-secondary"]);
         low_res_btn.set_hexpand(true);
 
+        let hyper_btn = Button::with_label("🚀 HYPER BOOST (ADAM TURBO - 240 FPS)");
+        hyper_btn.set_css_classes(&["btn-primary"]);
+        hyper_btn.set_hexpand(true);
+
         btn_row.append(&balanced_btn);
         btn_row.append(&low_res_btn);
+        btn_row.append(&hyper_btn);
         preset_card.append(&btn_row);
 
         container.append(&preset_card);
@@ -170,6 +176,7 @@ impl SettingsView {
             container,
             balanced_btn,
             low_res_btn,
+            hyper_btn,
             ram_scale,
             ram_display_label,
             java_entry,

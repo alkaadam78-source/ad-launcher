@@ -1,197 +1,373 @@
-/* NUX Launcher Linux - Minimalist Dark Theme */
+/* ==========================================================================
+   AD LAUNCHER — CARTOON NEO-BRUTALISM THEME
+   Credit By AdamDevnoob
+   High-Contrast, Chunky Outlines, Hard Shadows, Vibrant Pop Colors & Animations
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes cartoon-float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes turbo-pulse {
+    0% {
+        box-shadow: 4px 4px 0px #000000;
+        background-color: #ffe600;
+    }
+    50% {
+        box-shadow: 6px 6px 0px #000000;
+        background-color: #00ff88;
+    }
+    100% {
+        box-shadow: 4px 4px 0px #000000;
+        background-color: #ffe600;
+    }
+}
+
+@keyframes badge-wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Global Window */
 window {
-    background-color: #121418;
-    color: #e2e8f0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Liberation Sans", sans-serif;
+    background-color: #12131a;
+    color: #ffffff;
+    font-family: "Impact", "Arial Black", "Montserrat", "Segoe UI", sans-serif;
     font-size: 13px;
 }
 
-/* Sidebar navigation */
+/* Sidebar Navigation */
 .sidebar {
-    background-color: #16181e;
-    border-right: 1px solid #232732;
-    padding: 12px 8px;
+    background-color: #1a1b26;
+    border-right: 3.5px solid #000000;
+    padding: 14px 10px;
+}
+
+.sidebar-title-box {
+    background-color: #ffe600;
+    border: 3px solid #000000;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    transition: all 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sidebar-title-box:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
 }
 
 .sidebar-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #f8fafc;
-    letter-spacing: 0.5px;
-    padding: 8px 12px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 1px;
 }
 
+/* AdamDevnoob Credit Ribbon */
+.adam-credit-badge {
+    background-color: #ff0055;
+    color: #ffffff;
+    border: 2.5px solid #000000;
+    border-radius: 8px;
+    box-shadow: 3px 3px 0px #000000;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    margin-bottom: 12px;
+    transition: all 180ms ease-in-out;
+}
+
+.adam-credit-badge:hover {
+    background-color: #00f0ff;
+    color: #000000;
+    transform: rotate(-1deg) scale(1.02);
+    box-shadow: 4px 4px 0px #000000;
+}
+
+/* Nav Buttons (Neo-Brutalist Chunky Buttons) */
 .nav-btn {
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    color: #94a3b8;
-    padding: 10px 14px;
-    margin: 2px 0;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 120ms ease-in-out;
+    background-color: #242636;
+    border: 2.5px solid #000000;
+    border-radius: 10px;
+    color: #cbd5e1;
+    padding: 9px 12px;
+    margin: 3px 0;
+    font-size: 12px;
+    font-weight: 800;
+    box-shadow: 3px 3px 0px #000000;
+    transition: all 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .nav-btn:hover {
-    background-color: #1f232d;
-    color: #f1f5f9;
+    background-color: #2e3146;
+    color: #ffffff;
+    transform: translate(-1.5px, -1.5px);
+    box-shadow: 4.5px 4.5px 0px #000000;
 }
 
 .nav-btn.active {
-    background-color: #262c3a;
-    color: #38bdf8;
-    font-weight: 600;
+    background-color: #00f0ff;
+    border: 2.5px solid #000000;
+    color: #000000;
+    font-weight: 900;
+    box-shadow: 4px 4px 0px #000000;
+    transform: translate(-1px, -1px);
 }
 
-/* Content area */
+/* Content Area */
 .content-area {
-    background-color: #121418;
-    padding: 24px 32px;
+    background-color: #12131a;
+    padding: 24px 28px;
 }
 
 .page-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #f8fafc;
-    margin-bottom: 4px;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
 }
 
 .page-subtitle {
-    font-size: 13px;
-    color: #64748b;
-    margin-bottom: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #a0aec0;
+    margin-bottom: 16px;
 }
 
-/* Cards & Panels */
+/* Cards (Neo-Brutalist Chunky Cartoon Cards) */
 .card {
-    background-color: #181b22;
-    border: 1px solid #252a36;
-    border-radius: 8px;
+    background-color: #1c1d29;
+    border: 3.5px solid #000000;
+    border-radius: 14px;
+    box-shadow: 6px 6px 0px #000000;
     padding: 18px 20px;
     margin-bottom: 16px;
+    transition: all 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover {
+    transform: translate(-1.5px, -1.5px);
+    box-shadow: 8px 8px 0px #000000;
 }
 
 .card-title {
     font-size: 14px;
-    font-weight: 600;
-    color: #cbd5e1;
-    margin-bottom: 12px;
+    font-weight: 900;
+    color: #ffe600;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
 }
 
-/* Play/Launch Button */
-.btn-play {
-    background-color: #10b981;
+/* Highlight Banner Card */
+.banner-card {
+    background-color: #ff0055;
+    border: 3.5px solid #000000;
+    border-radius: 14px;
+    box-shadow: 6px 6px 0px #000000;
+    padding: 14px 18px;
+    margin-bottom: 16px;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-    transition: background-color 150ms ease;
+}
+
+.banner-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+/* Play / Launch Button (Giant Cartoon Booster) */
+.btn-play {
+    background-color: #ffe600;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 14px 32px;
+    border: 4px solid #000000;
+    border-radius: 14px;
+    box-shadow: 6px 6px 0px #000000;
+    transition: all 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .btn-play:hover {
-    background-color: #059669;
+    background-color: #00ff88;
+    color: #000000;
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px #000000;
+}
+
+.btn-play:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0px #000000;
 }
 
 .btn-play:disabled {
-    background-color: #334155;
-    color: #64748b;
-    box-shadow: none;
+    background-color: #3f4255;
+    color: #717790;
+    border-color: #1a1b24;
+    box-shadow: 2px 2px 0px #000000;
+    transform: none;
 }
 
-/* Primary & Secondary Buttons */
+/* Primary Action Buttons */
 .btn-primary {
-    background-color: #2563eb;
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 6px;
-    padding: 8px 16px;
-    border: none;
+    background-color: #00f0ff;
+    color: #000000;
+    font-weight: 900;
+    border-radius: 10px;
+    padding: 9px 18px;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    transition: all 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
+    background-color: #ffe600;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
 }
 
+.btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
+}
+
+/* Secondary Action Buttons */
 .btn-secondary {
-    background-color: #232733;
-    color: #cbd5e1;
-    font-weight: 500;
-    border-radius: 6px;
+    background-color: #27293a;
+    color: #ffffff;
+    font-weight: 800;
+    border-radius: 10px;
     padding: 8px 14px;
-    border: 1px solid #333a4c;
+    border: 2.5px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    transition: all 120ms ease;
 }
 
 .btn-secondary:hover {
-    background-color: #2d3342;
-    color: #f8fafc;
+    background-color: #35384e;
+    transform: translate(-1.5px, -1.5px);
+    box-shadow: 4.5px 4.5px 0px #000000;
 }
 
+.btn-secondary:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: 1px 1px 0px #000000;
+}
+
+/* Danger Buttons */
 .btn-danger {
-    background-color: #dc2626;
+    background-color: #ff0055;
     color: #ffffff;
-    font-weight: 600;
-    border-radius: 6px;
-    padding: 6px 12px;
-    border: none;
+    font-weight: 900;
+    border-radius: 10px;
+    padding: 7px 14px;
+    border: 2.5px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    transition: all 120ms ease;
 }
 
 .btn-danger:hover {
-    background-color: #b91c1c;
+    background-color: #d60047;
+    transform: translate(-1.5px, -1.5px);
+    box-shadow: 4.5px 4.5px 0px #000000;
 }
 
-/* Inputs & Entries */
+/* Form Inputs & Dropdowns */
 entry, dropdown {
-    background-color: #1e222b;
-    border: 1px solid #2d3342;
-    border-radius: 6px;
-    color: #f1f5f9;
+    background-color: #1a1b26;
+    border: 3px solid #000000;
+    border-radius: 10px;
+    color: #ffffff;
     padding: 8px 12px;
+    box-shadow: 3px 3px 0px #000000;
+    font-weight: 700;
 }
 
 entry:focus, dropdown:focus {
-    border-color: #38bdf8;
+    border-color: #00f0ff;
+    box-shadow: 5px 5px 0px #000000;
 }
 
-/* Badges & Pills */
+/* Badges & Stickers (Neo-Brutalist Cartoon Badges) */
 .badge-ready {
-    background-color: #064e3b;
-    color: #34d399;
-    border-radius: 4px;
-    padding: 3px 8px;
+    background-color: #00ff88;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px #000000;
+    padding: 4px 10px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 900;
+    letter-spacing: 0.5px;
 }
 
 .badge-info {
-    background-color: #1e3a5f;
-    color: #38bdf8;
-    border-radius: 4px;
-    padding: 3px 8px;
+    background-color: #00f0ff;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px #000000;
+    padding: 4px 10px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 900;
+}
+
+.badge-turbo {
+    background-color: #ffe600;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px #000000;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 900;
 }
 
 .badge-warning {
-    background-color: #78350f;
-    color: #fbbf24;
-    border-radius: 4px;
-    padding: 3px 8px;
+    background-color: #ff9900;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px #000000;
+    padding: 4px 10px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 900;
 }
 
-/* Logs and console */
-.log-view {
-    background-color: #0b0c0e;
-    color: #94a3b8;
-    font-family: monospace;
-    font-size: 11px;
+/* Progress Bar (Cartoon Neon Stripes) */
+progressbar trough {
+    background-color: #1a1b26;
+    border: 2.5px solid #000000;
+    border-radius: 8px;
+    box-shadow: 3px 3px 0px #000000;
+    min-height: 16px;
+}
+
+progressbar progress {
+    background-color: #00ff88;
     border-radius: 6px;
-    border: 1px solid #1e222b;
-    padding: 8px;
+    border-right: 2px solid #000000;
+}
+
+/* Console Logs */
+.log-view {
+    background-color: #0b0c12;
+    color: #00ff88;
+    font-family: "DejaVu Sans Mono", "Fira Code", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 10px;
 }

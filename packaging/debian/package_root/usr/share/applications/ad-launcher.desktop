@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Ad Launcher
+Comment=Credit By AdamDevnoob — Extreme Potato & FPS Boost Minecraft Launcher
+Exec=/home/alz/.local/bin/ad-launcher
+Icon=ad-launcher
+Terminal=false
+Type=Application
+Categories=Game;
+Keywords=minecraft;game;launcher;fabric;sodium;iris;fps;boost;adam;
+StartupNotify=true

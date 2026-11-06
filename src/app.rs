@@ -63,32 +63,38 @@ impl MainWindow {
 
         let window = ApplicationWindow::builder()
             .application(app)
-            .title("NUX Launcher Linux — Personal Edition")
-            .default_width(1024)
+            .title("Ad Launcher — Credit By AdamDevnoob (Extreme FPS Boost)")
+            .default_width(1040)
             .default_height(640)
             .build();
 
         // Main layout: Horizontal box with sidebar and stack
         let root_box = GtkBox::new(Orientation::Horizontal, 0);
 
-        // Sidebar
+        // Sidebar (Cartoon Neo-Brutalism)
         let sidebar = GtkBox::new(Orientation::Vertical, 4);
         sidebar.set_css_classes(&["sidebar"]);
-        sidebar.set_size_request(200, -1);
+        sidebar.set_size_request(210, -1);
 
-        let brand_box = GtkBox::new(Orientation::Vertical, 2);
-        let brand_lbl = Label::new(Some("NUX LAUNCHER"));
+        let brand_box = GtkBox::new(Orientation::Vertical, 4);
+
+        let brand_card = GtkBox::new(Orientation::Horizontal, 8);
+        brand_card.set_css_classes(&["sidebar-title-box"]);
+
+        let logo_img = gtk4::Image::from_icon_name("ad-launcher");
+        logo_img.set_pixel_size(24);
+        brand_card.append(&logo_img);
+
+        let brand_lbl = Label::new(Some("AD LAUNCHER"));
         brand_lbl.set_css_classes(&["sidebar-title"]);
-        brand_lbl.set_halign(gtk4::Align::Start);
+        brand_card.append(&brand_lbl);
 
-        let edition_lbl = Label::new(Some("Debian Native Edition"));
-        edition_lbl.set_css_classes(&["page-subtitle"]);
-        edition_lbl.set_margin_start(12);
-        edition_lbl.set_margin_bottom(8);
-        edition_lbl.set_halign(gtk4::Align::Start);
+        let credit_lbl = Label::new(Some("⚡ Credit By AdamDevnoob"));
+        credit_lbl.set_css_classes(&["adam-credit-badge"]);
+        credit_lbl.set_halign(gtk4::Align::Center);
 
-        brand_box.append(&brand_lbl);
-        brand_box.append(&edition_lbl);
+        brand_box.append(&brand_card);
+        brand_box.append(&credit_lbl);
         sidebar.append(&brand_box);
 
         let stack = Stack::new();
@@ -133,6 +139,23 @@ impl MainWindow {
             sidebar.append(&btn);
             nav_buttons.push((id.to_string(), btn));
         }
+
+        // Cartoon Turbo Status Footer in Sidebar
+        let turbo_status_box = GtkBox::new(Orientation::Vertical, 4);
+        turbo_status_box.set_margin_top(16);
+        turbo_status_box.set_valign(gtk4::Align::End);
+        turbo_status_box.set_vexpand(true);
+
+        let turbo_lbl = Label::new(Some("🚀 ADAM TURBO: ON"));
+        turbo_lbl.set_css_classes(&["badge-turbo"]);
+        turbo_status_box.append(&turbo_lbl);
+
+        let fps_lbl = Label::new(Some("⚡ 120-240 FPS BOOST"));
+        fps_lbl.set_css_classes(&["badge-ready"]);
+        fps_lbl.set_margin_top(2);
+        turbo_status_box.append(&fps_lbl);
+
+        sidebar.append(&turbo_status_box);
 
         root_box.append(&sidebar);
         root_box.append(&stack);
@@ -208,6 +231,17 @@ impl MainWindow {
             self.settings_view.low_res_btn.connect_clicked(move |_| {
                 let mut state = win.state.borrow_mut();
                 state.core.settings.apply_preset(OptimizationPreset::LowResource);
+                let _ = state.core.settings.save();
+                drop(state);
+                win.refresh_settings_view();
+                win.refresh_home_view();
+            });
+        }
+        {
+            let win = self.clone();
+            self.settings_view.hyper_btn.connect_clicked(move |_| {
+                let mut state = win.state.borrow_mut();
+                state.core.settings.apply_preset(OptimizationPreset::HyperBoost);
                 let _ = state.core.settings.save();
                 drop(state);
                 win.refresh_settings_view();
