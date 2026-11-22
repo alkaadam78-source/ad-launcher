@@ -33,6 +33,10 @@ impl LocalTransferManager {
     /// Generates transfer invitation for pairing devices on local Wi-Fi / Ethernet
     pub fn create_pairing_token(device_name: &str) -> String {
         let random_suffix = uuid::Uuid::new_v4().to_string();
-        format!("AD-P2P-{}-{}", device_name.replace(' ', "-"), &random_suffix[..8])
+        format!(
+            "AD-P2P-{}-{}",
+            device_name.replace(' ', "-"),
+            &random_suffix[..8]
+        )
     }
 }

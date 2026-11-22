@@ -85,7 +85,11 @@ impl InstanceImporter {
                 if path.is_dir() {
                     let name = entry.file_name().to_string_lossy().to_string();
                     let mc_dir = path.join(".minecraft");
-                    let check_dir = if mc_dir.exists() { mc_dir } else { path.clone() };
+                    let check_dir = if mc_dir.exists() {
+                        mc_dir
+                    } else {
+                        path.clone()
+                    };
 
                     let mods_count = Self::count_files_in_dir(&check_dir.join("mods"), "jar");
                     let worlds_count = Self::count_subdirs(&check_dir.join("saves"));
@@ -112,11 +116,7 @@ impl InstanceImporter {
             .map(|entries| {
                 entries
                     .flatten()
-                    .filter(|e| {
-                        e.path()
-                            .extension()
-                            .map_or(false, |ext| ext == extension)
-                    })
+                    .filter(|e| e.path().extension().map_or(false, |ext| ext == extension))
                     .count()
             })
             .unwrap_or(0)

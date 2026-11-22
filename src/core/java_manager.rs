@@ -106,7 +106,9 @@ impl JavaManager {
 
         let (major, ver_str) = Self::parse_java_version(&combined);
         let vendor = Self::parse_vendor(&combined);
-        let is_64bit = combined.contains("64-Bit") || combined.contains("x86_64") || combined.contains("amd64");
+        let is_64bit = combined.contains("64-Bit")
+            || combined.contains("x86_64")
+            || combined.contains("amd64");
         let is_recommended = major == 17 || major == 21;
 
         Some(JavaRuntimeInfo {

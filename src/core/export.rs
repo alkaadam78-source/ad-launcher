@@ -29,8 +29,8 @@ impl InstancePorter {
     ) -> std::io::Result<u64> {
         let file = File::create(output_zip_path)?;
         let mut zip = ZipWriter::new(file);
-        let options = SimpleFileOptions::default()
-            .compression_method(zip::CompressionMethod::Deflated);
+        let options =
+            SimpleFileOptions::default().compression_method(zip::CompressionMethod::Deflated);
 
         // 1. Write ad-instance.json manifest
         zip.start_file("ad-instance.json", options)?;

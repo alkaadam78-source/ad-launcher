@@ -1,7 +1,7 @@
-use gtk4::prelude::*;
-use gtk4::Application;
 use ad_launcher::app::{load_css, MainWindow, APP_ID};
 use ad_launcher::core;
+use gtk4::prelude::*;
+use gtk4::Application;
 use std::env;
 
 fn main() {

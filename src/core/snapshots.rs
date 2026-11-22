@@ -85,7 +85,11 @@ impl SnapshotManager {
         if let Ok(entries) = fs::read_dir(&self.snapshots_dir) {
             for entry in entries.flatten() {
                 let path = entry.path();
-                if path.is_dir() && path.file_name().map_or(false, |n| n.to_string_lossy().starts_with(instance_id)) {
+                if path.is_dir()
+                    && path
+                        .file_name()
+                        .map_or(false, |n| n.to_string_lossy().starts_with(instance_id))
+                {
                     let meta_file = path.join("snapshot.json");
                     if meta_file.exists() {
                         if let Ok(content) = fs::read_to_string(&meta_file) {
@@ -101,7 +105,11 @@ impl SnapshotManager {
         list
     }
 
-    pub fn restore_snapshot(&self, snapshot: &InstanceSnapshot, target_instance_dir: &Path) -> std::io::Result<()> {
+    pub fn restore_snapshot(
+        &self,
+        snapshot: &InstanceSnapshot,
+        target_instance_dir: &Path,
+    ) -> std::io::Result<()> {
         let snap_mods = snapshot.snapshot_path.join("mods");
         let target_mods = target_instance_dir.join("mods");
         if snap_mods.exists() {

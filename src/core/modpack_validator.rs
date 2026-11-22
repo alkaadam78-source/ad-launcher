@@ -50,7 +50,11 @@ impl ModpackValidator {
                     description: format!(
                         "Multiple jars exist for '{}': {}. Remove older versions to prevent crash.",
                         name,
-                        entries.iter().map(|e| e.file_name.as_str()).collect::<Vec<_>>().join(", ")
+                        entries
+                            .iter()
+                            .map(|e| e.file_name.as_str())
+                            .collect::<Vec<_>>()
+                            .join(", ")
                     ),
                 });
             }
@@ -58,7 +62,9 @@ impl ModpackValidator {
 
         // 2. Check for Essential Fabric Dependencies
         if loader.to_lowercase() == "fabric" && total > 0 {
-            let has_fabric_api = known_mods.iter().any(|m| m.contains("fabricapi") || m.contains("fabric-api"));
+            let has_fabric_api = known_mods
+                .iter()
+                .any(|m| m.contains("fabricapi") || m.contains("fabric-api"));
             if !has_fabric_api {
                 issues.push(ModValidationIssue {
                     level: IssueSeverity::Warning,
@@ -70,26 +76,35 @@ impl ModpackValidator {
         }
 
         // 3. Check for Potato Optimization Synergy (Intel HD 620 target)
-        let has_sodium = known_mods.iter().any(|m| m.contains("sodium") || m.contains("embeddium"));
-        let has_iris = known_mods.iter().any(|m| m.contains("iris") || m.contains("oculus"));
+        let has_sodium = known_mods
+            .iter()
+            .any(|m| m.contains("sodium") || m.contains("embeddium"));
+        let has_iris = known_mods
+            .iter()
+            .any(|m| m.contains("iris") || m.contains("oculus"));
         let has_lithium = known_mods.iter().any(|m| m.contains("lithium"));
         let has_ferrite = known_mods.iter().any(|m| m.contains("ferritecore"));
 
         if !has_sodium && mc_version.starts_with("1.2") {
-            recommendations.push("Commission Sodium / Embeddium for 3x - 5x FPS on Intel HD Graphics.".to_string());
+            recommendations.push(
+                "Commission Sodium / Embeddium for 3x - 5x FPS on Intel HD Graphics.".to_string(),
+            );
         }
         if has_iris && !has_sodium {
             issues.push(ModValidationIssue {
                 level: IssueSeverity::Warning,
                 title: "Iris Shaders Without Sodium".to_string(),
-                description: "Iris shaders require Sodium for rendering pipeline hooks.".to_string(),
+                description: "Iris shaders require Sodium for rendering pipeline hooks."
+                    .to_string(),
             });
         }
         if !has_lithium && total > 5 {
-            recommendations.push("Add Lithium for server physics & tick loop optimization.".to_string());
+            recommendations
+                .push("Add Lithium for server physics & tick loop optimization.".to_string());
         }
         if !has_ferrite && total > 15 {
-            recommendations.push("Add FerriteCore to reduce memory allocation footprint by ~40%.".to_string());
+            recommendations
+                .push("Add FerriteCore to reduce memory allocation footprint by ~40%.".to_string());
         }
 
         let is_valid = !issues.iter().any(|i| i.level == IssueSeverity::Critical);

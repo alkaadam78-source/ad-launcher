@@ -182,7 +182,10 @@ impl MainWindow {
         stack.add_named(&wrap_scrolled(&storage_view.container), Some("storage"));
         stack.add_named(&wrap_scrolled(&mods_view.container), Some("mods"));
         stack.add_named(&wrap_scrolled(&downloads_view.container), Some("downloads"));
-        stack.add_named(&wrap_scrolled(&multiplayer_view.container), Some("multiplayer"));
+        stack.add_named(
+            &wrap_scrolled(&multiplayer_view.container),
+            Some("multiplayer"),
+        );
         stack.add_named(&wrap_scrolled(&settings_view.container), Some("settings"));
         stack.add_named(&wrap_scrolled(&account_view.container), Some("account"));
         stack.add_named(&wrap_scrolled(&about_view.container), Some("about"));
@@ -409,40 +412,64 @@ impl MainWindow {
         // 5b. Settings: Export Sanitized Diagnostics
         {
             let win = self.clone();
-            self.settings_view.export_diag_btn.connect_clicked(move |_| {
-                let state = win.state.borrow();
-                let report = crate::core::diagnostics::generate_sanitized_report(&state.specs, &state.core.settings);
-                let export_path = state.core.settings.minecraft_dir.join("ad_launcher_diagnostic_report.txt");
-                drop(state);
-                match crate::core::diagnostics::export_report_to_file(&export_path, &report) {
-                    Ok(_) => {
-                        win.settings_view.status_label.set_text(&format!("Exported: {}", export_path.display()));
-                        win.settings_view.status_label.set_visible(true);
-                        win.settings_view.status_label.set_css_classes(&["badge-ready"]);
-                        win.home_view.append_log(&format!("[DIAGNOSTICS] Sanitized report exported to {}", export_path.display()));
+            self.settings_view
+                .export_diag_btn
+                .connect_clicked(move |_| {
+                    let state = win.state.borrow();
+                    let report = crate::core::diagnostics::generate_sanitized_report(
+                        &state.specs,
+                        &state.core.settings,
+                    );
+                    let export_path = state
+                        .core
+                        .settings
+                        .minecraft_dir
+                        .join("ad_launcher_diagnostic_report.txt");
+                    drop(state);
+                    match crate::core::diagnostics::export_report_to_file(&export_path, &report) {
+                        Ok(_) => {
+                            win.settings_view
+                                .status_label
+                                .set_text(&format!("Exported: {}", export_path.display()));
+                            win.settings_view.status_label.set_visible(true);
+                            win.settings_view
+                                .status_label
+                                .set_css_classes(&["badge-ready"]);
+                            win.home_view.append_log(&format!(
+                                "[DIAGNOSTICS] Sanitized report exported to {}",
+                                export_path.display()
+                            ));
+                        }
+                        Err(e) => {
+                            win.settings_view
+                                .status_label
+                                .set_text(&format!("Export failed: {}", e));
+                            win.settings_view.status_label.set_visible(true);
+                            win.settings_view
+                                .status_label
+                                .set_css_classes(&["badge-warning"]);
+                        }
                     }
-                    Err(e) => {
-                        win.settings_view.status_label.set_text(&format!("Export failed: {}", e));
-                        win.settings_view.status_label.set_visible(true);
-                        win.settings_view.status_label.set_css_classes(&["badge-warning"]);
-                    }
-                }
-            });
+                });
         }
 
         // 5c. Settings: Reset to Balanced Defaults
         {
             let win = self.clone();
-            self.settings_view.reset_config_btn.connect_clicked(move |_| {
-                let mut state = win.state.borrow_mut();
-                state.core.settings = crate::config::settings::LauncherSettings::default();
-                let _ = state.core.settings.save();
-                drop(state);
-                win.refresh_settings_view();
-                win.refresh_home_view();
-                win.settings_view.status_label.set_text("Configuration reset to balanced defaults.");
-                win.settings_view.status_label.set_visible(true);
-            });
+            self.settings_view
+                .reset_config_btn
+                .connect_clicked(move |_| {
+                    let mut state = win.state.borrow_mut();
+                    state.core.settings = crate::config::settings::LauncherSettings::default();
+                    let _ = state.core.settings.save();
+                    drop(state);
+                    win.refresh_settings_view();
+                    win.refresh_home_view();
+                    win.settings_view
+                        .status_label
+                        .set_text("Configuration reset to balanced defaults.");
+                    win.settings_view.status_label.set_visible(true);
+                });
         }
 
         // 5d. Settings: Language Selection (English / Indonesian)
@@ -455,7 +482,9 @@ impl MainWindow {
                 drop(state);
                 win.settings_view.lang_en_btn.add_css_class("active");
                 win.settings_view.lang_id_btn.remove_css_class("active");
-                win.settings_view.status_label.set_text("Language set to English (US).");
+                win.settings_view
+                    .status_label
+                    .set_text("Language set to English (US).");
                 win.settings_view.status_label.set_visible(true);
             });
         }
@@ -468,7 +497,9 @@ impl MainWindow {
                 drop(state);
                 win.settings_view.lang_id_btn.add_css_class("active");
                 win.settings_view.lang_en_btn.remove_css_class("active");
-                win.settings_view.status_label.set_text("Bahasa diatur ke Bahasa Indonesia.");
+                win.settings_view
+                    .status_label
+                    .set_text("Bahasa diatur ke Bahasa Indonesia.");
                 win.settings_view.status_label.set_visible(true);
             });
         }
@@ -555,7 +586,11 @@ impl MainWindow {
                 let mc_dir = state.core.settings.minecraft_dir.clone();
                 let ram_mb = state.core.settings.ram_mb;
                 let inst_dir = mc_dir.join("instances").join(&selected_id);
-                let check_dir = if inst_dir.exists() { inst_dir } else { mc_dir.clone() };
+                let check_dir = if inst_dir.exists() {
+                    inst_dir
+                } else {
+                    mc_dir.clone()
+                };
                 let export_zip = mc_dir.join(format!("{}_archive.zip", selected_id));
                 let manifest = crate::core::export::InstanceExportManifest {
                     format_version: 1,
@@ -568,12 +603,22 @@ impl MainWindow {
                     exported_by: "AD Launcher 0.1.0-beta.1".to_string(),
                 };
                 drop(state);
-                match crate::core::export::InstancePorter::export_instance_to_archive(&check_dir, &manifest, &export_zip, false) {
+                match crate::core::export::InstancePorter::export_instance_to_archive(
+                    &check_dir,
+                    &manifest,
+                    &export_zip,
+                    false,
+                ) {
                     Ok(sz) => {
-                        win.home_view.append_log(&format!("[EXPORT] Exported instance archive: {} ({} KB)", export_zip.display(), sz / 1024));
+                        win.home_view.append_log(&format!(
+                            "[EXPORT] Exported instance archive: {} ({} KB)",
+                            export_zip.display(),
+                            sz / 1024
+                        ));
                     }
                     Err(e) => {
-                        win.home_view.append_log(&format!("[EXPORT ERROR] Failed to export archive: {}", e));
+                        win.home_view
+                            .append_log(&format!("[EXPORT ERROR] Failed to export archive: {}", e));
                     }
                 }
             });
@@ -585,16 +630,34 @@ impl MainWindow {
             self.instances_view.snapshot_btn.connect_clicked(move |_| {
                 let state = win.state.borrow();
                 let selected_id = state.core.settings.selected_instance.clone();
-                let inst_dir = state.core.settings.minecraft_dir.join("instances").join(&selected_id);
-                let check_dir = if inst_dir.exists() { inst_dir } else { state.core.settings.minecraft_dir.clone() };
-                let snap_mgr = crate::core::snapshots::SnapshotManager::new(&state.core.settings.minecraft_dir);
+                let inst_dir = state
+                    .core
+                    .settings
+                    .minecraft_dir
+                    .join("instances")
+                    .join(&selected_id);
+                let check_dir = if inst_dir.exists() {
+                    inst_dir
+                } else {
+                    state.core.settings.minecraft_dir.clone()
+                };
+                let snap_mgr = crate::core::snapshots::SnapshotManager::new(
+                    &state.core.settings.minecraft_dir,
+                );
                 drop(state);
-                match snap_mgr.create_snapshot(&selected_id, &check_dir, "Manual Baroque Snapshot") {
+                match snap_mgr.create_snapshot(&selected_id, &check_dir, "Manual Baroque Snapshot")
+                {
                     Ok(snap) => {
-                        win.home_view.append_log(&format!("[SNAPSHOT] Created snapshot '{}' ({} mods archived)", snap.id, snap.mods_count));
+                        win.home_view.append_log(&format!(
+                            "[SNAPSHOT] Created snapshot '{}' ({} mods archived)",
+                            snap.id, snap.mods_count
+                        ));
                     }
                     Err(e) => {
-                        win.home_view.append_log(&format!("[SNAPSHOT ERROR] Failed to create snapshot: {}", e));
+                        win.home_view.append_log(&format!(
+                            "[SNAPSHOT ERROR] Failed to create snapshot: {}",
+                            e
+                        ));
                     }
                 }
             });

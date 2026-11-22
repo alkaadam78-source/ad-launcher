@@ -62,7 +62,9 @@ fn translate_en<'a>(key: &'a str) -> &'a str {
         "nav.fullscreen" => "⛶ Fullscreen (F11)",
         "nav.windowed" => "🗗 Windowed (F11)",
         "home.hero.title" => "COURT OF CLASSICAL MINECRAFT",
-        "home.hero.subtitle" => "Caravaggio Chiaroscuro • Multi-Threaded Mesa OpenGL • Zero-Stutter Fabric Architecture",
+        "home.hero.subtitle" => {
+            "Caravaggio Chiaroscuro • Multi-Threaded Mesa OpenGL • Zero-Stutter Fabric Architecture"
+        }
         "home.play" => "⚔  LAUNCH MINECRAFT",
         "home.status.ready" => "Ready to launch",
         "settings.title" => "ROYAL PREFERENCES & ENGINE CONFIGURATION",
@@ -95,7 +97,9 @@ fn translate_id<'a>(key: &'a str) -> &'a str {
         "nav.fullscreen" => "⛶ Layar Penuh (F11)",
         "nav.windowed" => "🗗 Jendela (F11)",
         "home.hero.title" => "ISTANA MINECRAFT KLASIK",
-        "home.hero.subtitle" => "Chiaroscuro Caravaggio • Mesa OpenGL Multi-Threaded • Arsitektur Fabric Anti-Lag",
+        "home.hero.subtitle" => {
+            "Chiaroscuro Caravaggio • Mesa OpenGL Multi-Threaded • Arsitektur Fabric Anti-Lag"
+        }
         "home.play" => "⚔  LUNCURKAN MINECRAFT",
         "home.status.ready" => "Siap diluncurkan",
         "settings.title" => "PREFERENSI KERAJAAN & KONFIGURASI ENGINE",

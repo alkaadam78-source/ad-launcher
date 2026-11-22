@@ -2,8 +2,8 @@ use ad_launcher::config::settings::LauncherSettings;
 use ad_launcher::core::diagnostics::generate_sanitized_report;
 use ad_launcher::core::i18n::{t, Language};
 use ad_launcher::core::importer::InstanceImporter;
-use ad_launcher::core::mods::ModInfo;
 use ad_launcher::core::modpack_validator::ModpackValidator;
+use ad_launcher::core::mods::ModInfo;
 use ad_launcher::core::updater::{AppUpdater, UpdateChannel};
 use ad_launcher::utils::system::detect_system_specs;
 
@@ -56,7 +56,10 @@ fn test_modpack_validator_duplicate_detection() {
 
     let report = ModpackValidator::validate_mods(&mods, "1.20.1", "fabric");
     assert!(!report.is_valid);
-    assert!(report.issues.iter().any(|i| i.title.contains("Duplicate Mod Detected")));
+    assert!(report
+        .issues
+        .iter()
+        .any(|i| i.title.contains("Duplicate Mod Detected")));
 }
 
 #[test]

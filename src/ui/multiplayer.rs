@@ -171,12 +171,18 @@ impl MultiplayerView {
                 if res.is_online {
                     ping_btn_clone.set_label(&format!("{} ms", res.latency_ms.unwrap_or(0)));
                     ping_btn_clone.set_css_classes(&["btn-emerald"]);
-                    status_ref.set_text(&format!("Realm {}:{} is online and responding.", s_addr, s_port));
+                    status_ref.set_text(&format!(
+                        "Realm {}:{} is online and responding.",
+                        s_addr, s_port
+                    ));
                     status_ref.set_css_classes(&["badge-ready"]);
                 } else {
                     ping_btn_clone.set_label("Offline");
                     ping_btn_clone.set_css_classes(&["btn-danger"]);
-                    status_ref.set_text(&format!("Realm {}:{} unreachable: {}", s_addr, s_port, res.status_message));
+                    status_ref.set_text(&format!(
+                        "Realm {}:{} unreachable: {}",
+                        s_addr, s_port, res.status_message
+                    ));
                     status_ref.set_css_classes(&["badge-warning"]);
                 }
             });

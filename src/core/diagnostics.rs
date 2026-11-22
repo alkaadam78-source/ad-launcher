@@ -15,14 +15,14 @@ pub struct DiagnosticReport {
 /// Generates a sanitized diagnostic report suitable for sharing on GitHub or community forums.
 /// Completely redacts usernames, personal paths, and tokens.
 pub fn generate_sanitized_report(specs: &SystemSpecs, settings: &LauncherSettings) -> String {
-    let now = chrono::Local::now().format("%Y-%m-%d %H:%M:%S UTC").to_string();
+    let now = chrono::Local::now()
+        .format("%Y-%m-%d %H:%M:%S UTC")
+        .to_string();
 
     let user_home = dirs::home_dir().unwrap_or_else(|| PathBuf::from("/home/user"));
     let home_str = user_home.to_string_lossy().to_string();
 
-    let sanitize_path = |p: &str| -> String {
-        p.replace(&home_str, "~")
-    };
+    let sanitize_path = |p: &str| -> String { p.replace(&home_str, "~") };
 
     let mc_dir_sanitized = sanitize_path(&settings.minecraft_dir.to_string_lossy());
     let java_path_sanitized = match &settings.java_path {
@@ -67,7 +67,11 @@ pub fn generate_sanitized_report(specs: &SystemSpecs, settings: &LauncherSetting
         mc_dir_sanitized,
         java_path_sanitized,
         settings.ram_mb,
-        if settings.custom_jvm_args.is_empty() { "None (Default G1GC flags)" } else { &settings.custom_jvm_args },
+        if settings.custom_jvm_args.is_empty() {
+            "None (Default G1GC flags)"
+        } else {
+            &settings.custom_jvm_args
+        },
         settings.window_width,
         settings.window_height,
         settings.auto_close_on_launch,
