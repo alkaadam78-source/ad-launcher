@@ -68,11 +68,11 @@ impl ShaderManager {
              maxShadowRenderDistance=8\n\
              shaderPack={}\n\
              enableShaders={}\n",
-            pack_name,
-            enable
+            pack_name, enable
         );
 
-        fs::write(&iris_props, content).map_err(|e| format!("Failed to write iris.properties: {}", e))
+        fs::write(&iris_props, content)
+            .map_err(|e| format!("Failed to write iris.properties: {}", e))
     }
 
     pub fn list_shaderpacks(&self) -> Vec<ShaderPackInfo> {
@@ -111,7 +111,9 @@ impl ShaderManager {
         result
     }
 
-    pub fn analyze_compatibility(name: &str) -> (&'static str, &'static str, ShaderTier, &'static str) {
+    pub fn analyze_compatibility(
+        name: &str,
+    ) -> (&'static str, &'static str, ShaderTier, &'static str) {
         let lower = name.to_lowercase();
         if lower.contains("zerolag") || lower.contains("50x") || lower.contains("ad-potato") {
             (
@@ -148,7 +150,14 @@ impl ShaderManager {
                 ShaderTier::Balanced,
                 "Playful cartoon style matching Ad Launcher aesthetic! Turn off DOF for extra frames.",
             )
-        } else if lower.contains("hysteria") || lower.contains("bsl") || lower.contains("complementary") {
+        } else if lower.contains("hysteria") {
+            (
+                "★ 96% HYSTERIA OPTIMIZED (50X ULTRA-LIGHT)",
+                "75 - 110 FPS",
+                ShaderTier::PotatoFriendly,
+                "Rewritten by AdamDevnoob! Volumetric raymarching bypassed, shadowMap 512, Blocky clouds & TAAU 75%. Silent fan & gorgeous atmosphere on Intel HD 620!",
+            )
+        } else if lower.contains("bsl") || lower.contains("complementary") {
             (
                 "⚠ 60% HEAVY SHADER (DEMANDING)",
                 "30 - 45 FPS",

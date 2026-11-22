@@ -1,8 +1,7 @@
 use crate::core::launcher::LauncherStatus;
+use crate::ui::components::{create_page_header, create_section_divider};
 use gtk4::prelude::*;
-use gtk4::{
-    Box as GtkBox, Button, Label, Orientation, ProgressBar, ScrolledWindow, TextView,
-};
+use gtk4::{Box as GtkBox, Button, Label, Orientation, ProgressBar, ScrolledWindow, TextView};
 
 pub struct HomeView {
     pub container: GtkBox,
@@ -21,81 +20,81 @@ impl HomeView {
         let container = GtkBox::new(Orientation::Vertical, 16);
         container.set_css_classes(&["content-area"]);
 
-        // Page Header
-        let header_row = GtkBox::new(Orientation::Horizontal, 12);
-        
-        let logo_img = gtk4::Image::from_icon_name("ad-launcher");
-        logo_img.set_pixel_size(48);
-        header_row.append(&logo_img);
+        // Page Header with Subtle Ornamental Separator (Rule 1)
+        let header = create_page_header(
+            "AD LAUNCHER",
+            "The Art of Minecraft — Dark Baroque Edition for Debian Linux",
+        );
+        container.append(&header);
 
-        let title_col = GtkBox::new(Orientation::Vertical, 2);
-        let title = Label::new(Some("⚡ AD LAUNCHER"));
-        title.set_css_classes(&["page-title"]);
-        title.set_halign(gtk4::Align::Start);
+        // Baroque Gallery Entrance Hero Banner (Rule 4: Richer Baroque framing in hero)
+        let banner_card = GtkBox::new(Orientation::Vertical, 6);
+        banner_card.set_css_classes(&["banner-card"]);
 
-        let subtitle = Label::new(Some("Extreme Potato & Cartoon Edition — Ultra Boosted for Intel HD 620"));
-        subtitle.set_css_classes(&["page-subtitle"]);
-        subtitle.set_halign(gtk4::Align::Start);
+        let hero_badge_row = GtkBox::new(Orientation::Horizontal, 8);
+        let arch_icon = Label::new(Some("⚜"));
+        arch_icon.set_css_classes(&["page-title"]);
+        let banner_title = Label::new(Some("GRAND GALLERY ENTRANCE • ADAM TURBO ENGINE"));
+        banner_title.set_css_classes(&["banner-title"]);
+        hero_badge_row.append(&arch_icon);
+        hero_badge_row.append(&banner_title);
+        banner_card.append(&hero_badge_row);
 
-        title_col.append(&title);
-        title_col.append(&subtitle);
-        header_row.append(&title_col);
+        let banner_desc = Label::new(Some(
+            "Illuminated with multi-threaded Mesa OpenGL, Chiaroscuro shader calibration, and low-latency G1GC memory tuning for Intel HD 620."
+        ));
+        banner_desc.set_css_classes(&["page-subtitle"]);
+        banner_desc.set_wrap(true);
+        banner_desc.set_halign(gtk4::Align::Start);
+        banner_card.append(&banner_desc);
 
-        let credit_badge = Label::new(Some("⚡ CREDIT BY ADAMDEVNOOB ⚡"));
-        credit_badge.set_css_classes(&["adam-credit-badge"]);
-        credit_badge.set_halign(gtk4::Align::End);
-        credit_badge.set_hexpand(true);
-        credit_badge.set_valign(gtk4::Align::Center);
-        header_row.append(&credit_badge);
+        container.append(&banner_card);
 
-        container.append(&header_row);
-
-        // Turbo Feature Banner Card
-        let turbo_banner = GtkBox::new(Orientation::Horizontal, 12);
-        turbo_banner.set_css_classes(&["banner-card"]);
-        let turbo_icon = Label::new(Some("🚀"));
-        turbo_icon.set_css_classes(&["page-title"]);
-        let turbo_text = Label::new(Some("ADAM TURBO BOOST ENGAGED: Multi-threaded OpenGL + Potato Shaders + Zero-Stutter G1GC"));
-        turbo_text.set_css_classes(&["banner-title"]);
-        turbo_text.set_wrap(true);
-        turbo_banner.append(&turbo_icon);
-        turbo_banner.append(&turbo_text);
-        container.append(&turbo_banner);
-
-        // Instance & Launch Card
+        // Active Profile & Launch Card (Rule 3: Subtle corner accents, clean interior)
         let launch_card = GtkBox::new(Orientation::Vertical, 12);
         launch_card.set_css_classes(&["card"]);
 
-        let card_title = Label::new(Some("ACTIVE PROFILE"));
+        let card_header = GtkBox::new(Orientation::Horizontal, 8);
+        let card_title = Label::new(Some("CURATED ACTIVE PROFILE"));
         card_title.set_css_classes(&["card-title"]);
         card_title.set_halign(gtk4::Align::Start);
-        launch_card.append(&card_title);
+        card_title.set_hexpand(true);
+        card_header.append(&card_title);
 
-        let instance_label = Label::new(Some("Instance: Loading..."));
+        let status_label = Label::new(Some("Ready for Launch"));
+        status_label.set_css_classes(&["badge-ready"]);
+        status_label.set_halign(gtk4::Align::End);
+        card_header.append(&status_label);
+        launch_card.append(&card_header);
+
+        let details_col = GtkBox::new(Orientation::Vertical, 4);
+
+        let instance_label = Label::new(Some("Instance: Loading collection..."));
         instance_label.set_halign(gtk4::Align::Start);
-        launch_card.append(&instance_label);
+        details_col.append(&instance_label);
 
-        let java_label = Label::new(Some("Java Runtime: Detecting..."));
+        let java_label = Label::new(Some("Java Runtime: Probing environment..."));
         java_label.set_halign(gtk4::Align::Start);
-        launch_card.append(&java_label);
+        details_col.append(&java_label);
 
-        let ram_label = Label::new(Some("RAM Allocation: 3 GB (Balanced Preset)"));
+        let ram_label = Label::new(Some("RAM Allocation: 3072 MB (Balanced Baroque Preset)"));
         ram_label.set_halign(gtk4::Align::Start);
-        launch_card.append(&ram_label);
+        details_col.append(&ram_label);
 
-        let perf_label = Label::new(Some("Optimization Mods: Scanning..."));
+        let perf_label = Label::new(Some("Optimization Suite: Inspecting Sodium & Iris..."));
         perf_label.set_halign(gtk4::Align::Start);
-        launch_card.append(&perf_label);
+        details_col.append(&perf_label);
 
-        // Play Button Box
+        launch_card.append(&details_col);
+
+        // Master Launch Button (Rule 10: Simple, modern, minimalist controls)
         let btn_box = GtkBox::new(Orientation::Horizontal, 12);
-        btn_box.set_margin_top(8);
+        btn_box.set_margin_top(6);
 
-        let play_button = Button::with_label("🔥 LAUNCH MINECRAFT 1.20.1 (TURBO BOOST) 🔥");
+        let play_button = Button::with_label("⚔  LAUNCH MINECRAFT 1.20.1 (BAROQUE EDITION)  ⚔");
         play_button.set_css_classes(&["btn-play"]);
         play_button.set_hexpand(true);
         btn_box.append(&play_button);
-
         launch_card.append(&btn_box);
 
         // Progress bar
@@ -104,19 +103,17 @@ impl HomeView {
         progress_bar.set_visible(false);
         launch_card.append(&progress_bar);
 
-        let status_label = Label::new(Some("Ready to play."));
-        status_label.set_css_classes(&["badge-ready"]);
-        status_label.set_halign(gtk4::Align::Start);
-        launch_card.append(&status_label);
-
         container.append(&launch_card);
 
-        // Activity Log Card
+        // Symmetrical Section Divider (Rule 2)
+        container.append(&create_section_divider());
+
+        // Activity Log Card (Chronicle & Console)
         let log_card = GtkBox::new(Orientation::Vertical, 8);
         log_card.set_css_classes(&["card"]);
         log_card.set_vexpand(true);
 
-        let log_title = Label::new(Some("GAME ACTIVITY & CONSOLE LOG"));
+        let log_title = Label::new(Some("CHRONICLES & CONSOLE TELEMETRY"));
         log_title.set_css_classes(&["card-title"]);
         log_title.set_halign(gtk4::Align::Start);
         log_card.append(&log_title);
@@ -153,7 +150,12 @@ impl HomeView {
                 "Instance: {} (MC {} • {})",
                 inst.name, inst.mc_version, inst.loader
             ));
-            self.ram_label.set_text(&format!("RAM Allocation: {} MB", inst.ram_mb));
+            self.ram_label
+                .set_text(&format!("RAM Allocation: {} MB", inst.ram_mb));
+            self.play_button.set_label(&format!(
+                "⚔  LAUNCH MINECRAFT {} (BAROQUE EDITION)  ⚔",
+                inst.mc_version
+            ));
         }
 
         if let Some(ref j) = status.detected_java {
@@ -164,7 +166,8 @@ impl HomeView {
                 j.path.display()
             ));
         } else {
-            self.java_label.set_text("Java Runtime: None found! Please install Java 17.");
+            self.java_label
+                .set_text("Java Runtime: None found! Please configure Java 17+.");
         }
 
         let p = &status.performance_status;
@@ -183,10 +186,11 @@ impl HomeView {
         }
 
         if mods_found.is_empty() {
-            self.perf_label.set_text("Performance Mods: None active. (Visit Mods tab to configure)");
+            self.perf_label
+                .set_text("Performance Suite: None active. (Visit Mods archive to configure)");
         } else {
             self.perf_label.set_text(&format!(
-                "Performance Mods Active: {}",
+                "Performance Suite: Active ({})",
                 mods_found.join(", ")
             ));
         }

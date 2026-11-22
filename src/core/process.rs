@@ -7,8 +7,8 @@ use std::thread;
 #[derive(Debug, Clone)]
 pub enum ProcessEvent {
     LogLine(String),
-    Started(u32), // PID
-    Finished(i32), // Exit code
+    Started(u32),    // PID
+    Finished(i32),   // Exit code
     Crashed(String), // Crash report or error
 }
 
@@ -114,14 +114,19 @@ impl MinecraftProcess {
                     let code = status.code().unwrap_or(-1);
                     if code != 0 {
                         // Check for crash reports in game_dir/crash-reports
-                        let crash_msg = Self::find_latest_crash_report(&game_dir)
-                            .unwrap_or_else(|| format!("Minecraft terminated with exit code {}", code));
+                        let crash_msg =
+                            Self::find_latest_crash_report(&game_dir).unwrap_or_else(|| {
+                                format!("Minecraft terminated with exit code {}", code)
+                            });
                         let _ = event_tx.send(ProcessEvent::Crashed(crash_msg));
                     }
                     let _ = event_tx.send(ProcessEvent::Finished(code));
                 }
                 Err(e) => {
-                    let _ = event_tx.send(ProcessEvent::Crashed(format!("Process monitor error: {}", e)));
+                    let _ = event_tx.send(ProcessEvent::Crashed(format!(
+                        "Process monitor error: {}",
+                        e
+                    )));
                 }
             }
         });

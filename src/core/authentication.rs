@@ -130,6 +130,18 @@ impl AuthManager {
         }
     }
 
+    /// Sets up a designated Demo Mode profile with clearly labeled sample data
+    pub fn create_demo_profile(&self) -> AccountProfile {
+        AccountProfile {
+            username: "Demo Explorer (Sample Data)".to_string(),
+            uuid: "00000000-0000-0000-0000-000000000000".to_string(),
+            is_microsoft: false,
+            skin_url: None,
+            access_token: "DEMO_SIMULATED_SESSION".to_string(),
+            refresh_token: None,
+        }
+    }
+
     /// Step 1: Initiate Microsoft OAuth Device Code Flow
     pub async fn initiate_device_code(&self) -> Result<DeviceCodeResponse, String> {
         let params = [
@@ -146,7 +158,10 @@ impl AuthManager {
             .map_err(|e| format!("Failed to initiate device code login: {}", e))?;
 
         if !resp.status().is_success() {
-            return Err(format!("Device code request failed with status: {}", resp.status()));
+            return Err(format!(
+                "Device code request failed with status: {}",
+                resp.status()
+            ));
         }
 
         resp.json::<DeviceCodeResponse>()
@@ -196,7 +211,10 @@ impl AuthManager {
     }
 
     /// Step 3: Complete Xbox Live -> XSTS -> Minecraft services authentication
-    pub async fn complete_minecraft_login(&self, msa_token: &str) -> Result<AccountProfile, String> {
+    pub async fn complete_minecraft_login(
+        &self,
+        msa_token: &str,
+    ) -> Result<AccountProfile, String> {
         // 1. Xbox Live authentication
         let xbl_body = serde_json::json!({
             "Properties": {
@@ -245,7 +263,9 @@ impl AuthManager {
             .map_err(|e| format!("XSTS auth failed: {}", e))?;
 
         if !xsts_resp.status().is_success() {
-            return Err("XSTS authentication failed. Account might not have Xbox profile.".to_string());
+            return Err(
+                "XSTS authentication failed. Account might not have Xbox profile.".to_string(),
+            );
         }
 
         let xsts_json: serde_json::Value = xsts_resp.json().await.map_err(|e| e.to_string())?;
@@ -296,10 +316,14 @@ impl AuthManager {
             .map_err(|e| format!("Failed to fetch Minecraft profile: {}", e))?;
 
         if !profile_resp.status().is_success() {
-            return Err("Account does not own Minecraft Java Edition or has no profile created.".to_string());
+            return Err(
+                "Account does not own Minecraft Java Edition or has no profile created."
+                    .to_string(),
+            );
         }
 
-        let profile_data: MinecraftProfileResponse = profile_resp.json().await.map_err(|e| e.to_string())?;
+        let profile_data: MinecraftProfileResponse =
+            profile_resp.json().await.map_err(|e| e.to_string())?;
         let skin_url = profile_data
             .skins
             .and_then(|s| s.into_iter().find(|sk| sk.state == "ACTIVE"))

@@ -32,7 +32,11 @@ impl MinecraftEngine {
         let _ = event_tx.send(ProcessEvent::LogLine(format!(
             "[NUX] Using Java {} ({}) at {}",
             java_runtime.version_string,
-            if java_runtime.is_64bit { "64-bit" } else { "32-bit" },
+            if java_runtime.is_64bit {
+                "64-bit"
+            } else {
+                "32-bit"
+            },
             java_runtime.path.display()
         )));
 
@@ -153,7 +157,12 @@ impl MinecraftEngine {
         game_args.push("--gameDir".to_string());
         game_args.push(instance.game_dir.to_string_lossy().to_string());
         game_args.push("--assetsDir".to_string());
-        game_args.push(self.minecraft_dir.join("assets").to_string_lossy().to_string());
+        game_args.push(
+            self.minecraft_dir
+                .join("assets")
+                .to_string_lossy()
+                .to_string(),
+        );
         game_args.push("--assetIndex".to_string());
         game_args.push(pkg.asset_index.id.clone());
         game_args.push("--uuid".to_string());
@@ -161,7 +170,14 @@ impl MinecraftEngine {
         game_args.push("--accessToken".to_string());
         game_args.push(account.access_token.clone());
         game_args.push("--userType".to_string());
-        game_args.push(if account.is_microsoft { "msa" } else { "mojang" }.to_string());
+        game_args.push(
+            if account.is_microsoft {
+                "msa"
+            } else {
+                "mojang"
+            }
+            .to_string(),
+        );
         game_args.push("--versionType".to_string());
         game_args.push("release".to_string());
 
@@ -203,12 +219,36 @@ impl MinecraftEngine {
         }
 
         let runtimes = discover_java_runtimes(None);
-        runtimes
-            .into_iter()
-            .find(|r| r.is_compatible_1_20_1)
-            .ok_or_else(|| {
-                "No compatible Java 17+ 64-bit runtime found. Please install OpenJDK 17.".to_string()
-            })
+        if runtimes.is_empty() {
+            return Err("No Java runtime found. Please install OpenJDK 17 or 21.".to_string());
+        }
+
+        let v = &instance.mc_version;
+        let is_legacy = v.starts_with("1.7.")
+            || v.starts_with("1.8.")
+            || v.starts_with("1.12.")
+            || v.starts_with("1.16.")
+            || v.starts_with("b1.")
+            || v.starts_with("a1.")
+            || v.starts_with("c0.")
+            || v.starts_with("rd-");
+
+        if is_legacy {
+            if let Some(rt) = runtimes.iter().find(|r| r.major_version == 8 && r.is_64bit) {
+                return Ok(rt.clone());
+            }
+        } else if let Some(rt) = runtimes
+            .iter()
+            .find(|r| r.major_version >= 17 && r.is_64bit)
+        {
+            return Ok(rt.clone());
+        }
+
+        if let Some(rt) = runtimes.iter().find(|r| r.is_64bit) {
+            return Ok(rt.clone());
+        }
+
+        Ok(runtimes[0].clone())
     }
 
     fn find_existing_fabric_version(&self, mc_version: &str) -> Option<PathBuf> {
@@ -257,7 +297,11 @@ impl MinecraftEngine {
                         let artifact = parts[1];
                         let version = parts[2];
                         let jar_name = format!("{}-{}.jar", artifact, version);
-                        let lib_path = libs_dir.join(group).join(artifact).join(version).join(jar_name);
+                        let lib_path = libs_dir
+                            .join(group)
+                            .join(artifact)
+                            .join(version)
+                            .join(jar_name);
                         if lib_path.exists() && !classpath.contains(&lib_path) {
                             classpath.insert(0, lib_path); // Fabric loader jars should be first in classpath
                         }

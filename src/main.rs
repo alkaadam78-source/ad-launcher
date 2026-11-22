@@ -1,7 +1,7 @@
-use nux_launcher::app::{load_css, MainWindow, APP_ID};
-use nux_launcher::core;
 use gtk4::prelude::*;
 use gtk4::Application;
+use ad_launcher::app::{load_css, MainWindow, APP_ID};
+use ad_launcher::core;
 use std::env;
 
 fn main() {
@@ -11,12 +11,15 @@ fn main() {
     if args.len() > 1 {
         match args[1].as_str() {
             "--version" | "-v" => {
-                println!("Ad Launcher {}", env!("CARGO_PKG_VERSION"));
-                println!("Credit By AdamDevnoob — Extreme Potato Edition (Debian x86_64)");
+                println!(
+                    "AD Launcher {} — The Dark Baroque Edition",
+                    env!("CARGO_PKG_VERSION")
+                );
+                println!("Crafted by AdamDevnoob (Debian x86_64)");
                 return;
             }
             "--help" | "-h" => {
-                println!("Ad Launcher Linux — Credit By AdamDevnoob");
+                println!("AD Launcher Linux — The Dark Baroque Edition");
                 println!("Usage: ad-launcher [OPTIONS] / nux-launcher [OPTIONS]");
                 println!();
                 println!("Options:");
@@ -26,8 +29,8 @@ fn main() {
                 return;
             }
             "--launch" => {
-                println!("[AD LAUNCHER] Launching Minecraft with Adam Turbo Engine...");
-                println!("[AD LAUNCHER] Credit By AdamDevnoob");
+                println!("[AD LAUNCHER] Launching Minecraft with Adam Turbo Engine (Dark Baroque Edition)...");
+                println!("[AD LAUNCHER] Crafted by AdamDevnoob");
                 let rt = tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime");
                 rt.block_on(async {
                     let mut core = match core::LauncherCore::init() {
@@ -46,7 +49,10 @@ fn main() {
                                     println!("[NUX] Minecraft Process started with PID {}", pid)
                                 }
                                 core::process::ProcessEvent::Finished(code) => {
-                                    println!("[NUX] Minecraft Process finished with exit code {}", code);
+                                    println!(
+                                        "[NUX] Minecraft Process finished with exit code {}",
+                                        code
+                                    );
                                     break;
                                 }
                                 core::process::ProcessEvent::Crashed(err) => {
@@ -67,9 +73,10 @@ fn main() {
         }
     }
 
-    let app = Application::builder()
-        .application_id(APP_ID)
-        .build();
+    let rt = tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime");
+    let _guard = rt.enter();
+
+    let app = Application::builder().application_id(APP_ID).build();
 
     app.connect_startup(|_| {
         load_css();

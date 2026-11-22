@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <path d="M4 44 V12 C4 8 8 4 12 4 H44" stroke="#78582F" stroke-width="1.5"/>
+  <path d="M8 44 V14 C8 10 10 8 14 8 H44" stroke="#B08A48" stroke-width="1"/>
+  <!-- Corner Baroque Scroll -->
+  <path d="M12 24 C12 16 16 12 24 12 C18 14 14 18 14 24 Z" fill="#D6B675"/>
+  <circle cx="12" cy="12" r="2.5" fill="#D6B675"/>
+  <circle cx="20" cy="8" r="1.5" fill="#B08A48"/>
+  <circle cx="8" cy="20" r="1.5" fill="#B08A48"/>
+</svg>

@@ -5,5 +5,6 @@ pub mod modrinth;
 pub mod neoforge;
 pub mod quilt;
 
+pub use curseforge::{CurseForgeClient, CurseForgeMod};
 pub use fabric::FabricClient;
-pub use modrinth::ModrinthClient;
+pub use modrinth::{ModrinthClient, ModrinthProject};

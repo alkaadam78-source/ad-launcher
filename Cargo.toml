@@ -1,10 +1,22 @@
 [package]
-name = "nux-launcher"
-version = "1.0.0"
+name = "ad-launcher"
+version = "0.1.0-beta.1"
 edition = "2021"
-authors = ["Antigravity Engineering"]
-description = "NUX Launcher Linux - Personal Native Minecraft Launcher for Debian"
-license = "GPL-3.0-or-later"
+authors = ["AdamDevnoob", "AD Launcher Contributors"]
+description = "AD Launcher — The Art of Minecraft (Dark Baroque Edition)"
+license = "MIT"
+repository = "https://github.com/adamdevnoob/ad-launcher"
+readme = "README.md"
+keywords = ["minecraft", "launcher", "gtk4", "linux", "dark-baroque"]
+categories = ["games"]
+
+[lib]
+name = "ad_launcher"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ad-launcher"
+path = "src/main.rs"
 
 [dependencies]
 # UI & GTK4

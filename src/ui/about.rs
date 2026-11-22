@@ -1,3 +1,4 @@
+use crate::ui::{create_page_header, create_section_divider};
 use crate::utils::system::SystemSpecs;
 use gtk4::prelude::*;
 use gtk4::{Box as GtkBox, Label, Orientation};
@@ -8,49 +9,49 @@ pub struct AboutView {
 
 impl AboutView {
     pub fn new(specs: &SystemSpecs) -> Self {
-        let container = GtkBox::new(Orientation::Vertical, 16);
+        let container = GtkBox::new(Orientation::Vertical, 18);
         container.set_css_classes(&["content-area"]);
 
-        let title = Label::new(Some("⚡ ABOUT AD LAUNCHER"));
-        title.set_css_classes(&["page-title"]);
-        title.set_halign(gtk4::Align::Start);
+        // Page Header (Rule 1: Heading with subtle ornamental separator)
+        container.append(&create_page_header(
+            "CHRONICLES & PEDIGREE OF AD LAUNCHER",
+            "The Dark Baroque Edition — High-Performance Native Linux Minecraft Architecture",
+        ));
 
-        let subtitle = Label::new(Some("Extreme Potato Edition — Cartoon Brutalism & Ultra FPS Booster"));
-        subtitle.set_css_classes(&["page-subtitle"]);
-        subtitle.set_halign(gtk4::Align::Start);
-
-        container.append(&title);
-        container.append(&subtitle);
-
-        // Creator Banner Card
+        // Historical Tribute Banner Card
         let creator_card = GtkBox::new(Orientation::Vertical, 8);
         creator_card.set_css_classes(&["banner-card"]);
-        let c_title = Label::new(Some("⚡ CREATED & OPTIMIZED BY ADAMDEVNOOB ⚡"));
+        let c_title = Label::new(Some("⚜ MASTER CRAFTSMANSHIP & DESIGN: ADAMDEVNOOB ⚜"));
         c_title.set_css_classes(&["banner-title"]);
         c_title.set_halign(gtk4::Align::Start);
-        let c_desc = Label::new(Some("Engineered with passion for high FPS Minecraft gaming on integrated GPUs (Intel HD 620) with lightweight shaders, multi-threaded Mesa OpenGL, and low-latency garbage collection."));
+        let c_desc = Label::new(Some(
+            "Engineered with devotion to high-frame-rate Minecraft gaming on integrated GPUs (Intel HD 620). Featuring lightweight Chiaroscuro shaders, multi-threaded Mesa OpenGL pipelines, and zero-stutter garbage collection."
+        ));
         c_desc.set_wrap(true);
         c_desc.set_halign(gtk4::Align::Start);
         creator_card.append(&c_title);
         creator_card.append(&c_desc);
         container.append(&creator_card);
 
-        // System Specs Card
-        let specs_card = GtkBox::new(Orientation::Vertical, 10);
+        // Section Divider (Rule 2)
+        container.append(&create_section_divider());
+
+        // Target Hardware Environment Card
+        let specs_card = GtkBox::new(Orientation::Vertical, 12);
         specs_card.set_css_classes(&["card"]);
 
-        let s_title = Label::new(Some("TARGET HARDWARE ENVIRONMENT"));
+        let s_title = Label::new(Some("CALIBRATED HARDWARE ENVIRONMENT"));
         s_title.set_css_classes(&["card-title"]);
         s_title.set_halign(gtk4::Align::Start);
         specs_card.append(&s_title);
 
         let sys_info = format!(
             "• Operating System: {} ({})\n\
-             • CPU: {} ({} logical cores)\n\
-             • GPU: Intel HD Graphics 620 (Mesa / Vulkan / OpenGL 4.6)\n\
+             • CPU: {} ({} logical execution cores)\n\
+             • GPU: Intel HD Graphics 620 (Mesa / Vulkan / OpenGL 4.6 with glthread=true)\n\
              • Total System RAM: {} MB (~8 GB)\n\
              • Available RAM: {} MB\n\
-             • Default Target Resolution: 1366x768",
+             • Primary Display Target: 1366x768 (Optimized Native GTK4)",
             specs.os_name,
             specs.os_version,
             specs.cpu_name,
@@ -66,22 +67,25 @@ impl AboutView {
 
         container.append(&specs_card);
 
-        // Tech Stack Card
-        let tech_card = GtkBox::new(Orientation::Vertical, 10);
+        // Section Divider (Rule 2)
+        container.append(&create_section_divider());
+
+        // Technology Stack Card
+        let tech_card = GtkBox::new(Orientation::Vertical, 12);
         tech_card.set_css_classes(&["card"]);
 
-        let t_title = Label::new(Some("TECHNOLOGY STACK & ARCHITECTURE"));
+        let t_title = Label::new(Some("TECHNOLOGY STACK & ARCHITECTURAL FOUNDATION"));
         t_title.set_css_classes(&["card-title"]);
         t_title.set_halign(gtk4::Align::Start);
         tech_card.append(&t_title);
 
-        let tech_info = "• Language: Rust 2021 (Zero-cost abstractions, memory safe)\n\
-                         • GUI Framework: GTK4 + Relm4 (Native Linux graphics integration)\n\
-                         • Async Runtime: Tokio 1.40 (Non-blocking I/O & downloads)\n\
-                         • HTTP Engine: Reqwest with Rustls (Modern TLS, high throughput)\n\
-                         • Storage: Embedded SQLite (rusqlite bundled)\n\
-                         • Target Version: Minecraft Java Edition 1.20.1 (Fabric + Sodium + Iris)\n\
-                         • Zero Chromium / Zero Electron background bloat";
+        let tech_info = "• Language: Rust 2021 Edition (Memory safety, fearless concurrency, zero-cost abstractions)\n\
+                         • GUI Toolkit: GTK4 + Relm4 (Native Wayland/X11 rendering with hardware acceleration)\n\
+                         • Asynchronous Engine: Tokio 1.40 (Non-blocking I/O, multi-threaded task spawning)\n\
+                         • Network Pipeline: Reqwest + Rustls (Modern TLS, high throughput chunked streaming)\n\
+                         • Storage Engine: Embedded SQLite (rusqlite bundled, zero daemon dependencies)\n\
+                         • Minecraft Target: 1.20.1 & Modern 1.21.4+ (Fabric + Sodium + Iris + Lithium)\n\
+                         • Zero Chromium / Zero Electron / Minimal Idle Memory Footprint";
 
         let tech_lbl = Label::new(Some(tech_info));
         tech_lbl.set_halign(gtk4::Align::Start);
@@ -90,18 +94,21 @@ impl AboutView {
 
         container.append(&tech_card);
 
-        // License & Credits Card
-        let lic_card = GtkBox::new(Orientation::Vertical, 10);
+        // Section Divider (Rule 2)
+        container.append(&create_section_divider());
+
+        // License & Heritage Card
+        let lic_card = GtkBox::new(Orientation::Vertical, 12);
         lic_card.set_css_classes(&["card"]);
 
-        let l_title = Label::new(Some("LICENSE & INTEGRITY"));
+        let l_title = Label::new(Some("HERITAGE & SOFTWARE INTEGRITY"));
         l_title.set_css_classes(&["card-title"]);
         l_title.set_halign(gtk4::Align::Start);
         lic_card.append(&l_title);
 
-        let lic_info = "NUX Launcher Linux is released under the GNU General Public License v3.0.\n\
-                        Uses official Mojang download endpoints and checksum verification.\n\
-                        Respects Microsoft authentication and Minecraft ownership requirements.";
+        let lic_info = "NUX Launcher Linux / AD Launcher is licensed under the GNU General Public License v3.0.\n\
+                        Integrates with official Mojang manifest endpoints and SHA-1 checksum verification.\n\
+                        Fully adheres to official Microsoft authentication protocols.";
 
         let lic_lbl = Label::new(Some(lic_info));
         lic_lbl.set_halign(gtk4::Align::Start);

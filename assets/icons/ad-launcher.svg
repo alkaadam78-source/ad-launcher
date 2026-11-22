@@ -1,65 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
   <defs>
-    <!-- Filter for hard brutalist cartoon shadow -->
-    <filter id="brutal-shadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="12" dy="12" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
-    </filter>
-    <filter id="small-shadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
-    </filter>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3D0A6"/>
+      <stop offset="35%" stop-color="#D6B675"/>
+      <stop offset="70%" stop-color="#B08A48"/>
+      <stop offset="100%" stop-color="#78582F"/>
+    </linearGradient>
+    <linearGradient id="shield-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#30231D"/>
+      <stop offset="40%" stop-color="#201815"/>
+      <stop offset="100%" stop-color="#100D0C"/>
+    </linearGradient>
+    <linearGradient id="burgundy-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#91445A"/>
+      <stop offset="50%" stop-color="#6B2638"/>
+      <stop offset="100%" stop-color="#421923"/>
+    </linearGradient>
   </defs>
 
-  <!-- Background Base Badge (Neo-Brutalist Sticker Block) -->
-  <!-- Hard Drop Shadow block -->
-  <rect x="42" y="42" width="440" height="440" rx="36" fill="#000000" />
-  
-  <!-- Main Vibrant Card: Electric Cyber Yellow -->
-  <rect x="30" y="30" width="440" height="440" rx="36" fill="#FFE600" stroke="#000000" stroke-width="12" />
+  <!-- Outer Baroque Flourish Frame -->
+  <circle cx="60" cy="60" r="56" stroke="url(#gold-grad)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <circle cx="60" cy="60" r="52" stroke="#78582F" stroke-width="1" stroke-dasharray="2,4" fill="none"/>
 
-  <!-- Cartoon Decorative Star Burst / Sparkles in corners -->
-  <!-- Top Right Sparkle -->
-  <path d="M 410 70 L 418 95 L 443 103 L 418 111 L 410 136 L 402 111 L 377 103 L 402 95 Z" fill="#FF0077" stroke="#000000" stroke-width="5" />
-  <!-- Bottom Left Sparkle -->
-  <path d="M 90 390 L 96 410 L 116 416 L 96 422 L 90 442 L 84 422 L 64 416 L 84 410 Z" fill="#00F0FF" stroke="#000000" stroke-width="4" />
+  <!-- Shield Body -->
+  <path d="M60 16 C76 16 94 22 94 44 C94 72 74 94 60 102 C46 94 26 72 26 44 C26 22 44 16 60 16 Z" 
+        fill="url(#shield-grad)" stroke="url(#gold-grad)" stroke-width="2.5"/>
 
-  <!-- Isometric Cartoon Minecraft Block -->
-  <g transform="translate(256, 215)">
-    <!-- Top Face (Grass / Emerald Green) -->
-    <path d="M 0 -105 L 125 -38 L 0 30 L -125 -38 Z" fill="#00FF88" stroke="#000000" stroke-width="10" stroke-linejoin="round" />
-    
-    <!-- Left Face (Dirt / Cyber Violet) -->
-    <path d="M -125 -38 L 0 30 L 0 145 L -125 78 Z" fill="#7928CA" stroke="#000000" stroke-width="10" stroke-linejoin="round" />
-    
-    <!-- Right Face (Dirt Shadow / Deep Purple) -->
-    <path d="M 0 30 L 125 -38 L 125 78 L 0 145 Z" fill="#4C1D95" stroke="#000000" stroke-width="10" stroke-linejoin="round" />
+  <!-- Inner Burgundy Inset -->
+  <path d="M60 22 C72 22 86 28 86 46 C86 68 70 86 60 94 C50 86 34 68 34 46 C34 28 48 22 60 22 Z" 
+        fill="url(#burgundy-grad)" opacity="0.65" stroke="#78582F" stroke-width="1"/>
 
-    <!-- Isometric Grass Drips (Cartoon Slime / Pixel drips) -->
-    <path d="M -125 -38 L -90 -18 L -90 0 L -60 -15 L -60 10 L -30 -5 L -30 20 L 0 30 L 0 145 L -125 78 Z" fill="#000000" opacity="0.15" />
-  </g>
+  <!-- Crown / Coronet on Top -->
+  <path d="M48 24 L52 14 L60 18 L68 14 L72 24 Z" fill="url(#gold-grad)" stroke="#78582F" stroke-width="0.8"/>
+  <circle cx="52" cy="14" r="1.5" fill="#E3D0A6"/>
+  <circle cx="60" cy="18" r="1.5" fill="#E3D0A6"/>
+  <circle cx="68" cy="14" r="1.5" fill="#E3D0A6"/>
 
-  <!-- Turbo Cartoon Lightning Bolt (Punchy Pink & White with Black border) -->
-  <g transform="translate(256, 210) rotate(-15)">
-    <!-- Shadow -->
-    <polygon points="12,-110 32,-110 -18,0 42,0 -58,130 -28,20 -78,20" fill="#000000" />
-    <!-- Main Bolt -->
-    <polygon points="0,-120 20,-120 -30,-10 30,-10 -70,120 -40,10 -90,10" fill="#FF0055" stroke="#000000" stroke-width="10" stroke-linejoin="miter" />
-    <!-- Inner Highlight -->
-    <polygon points="-5,-105 10,-105 -25,-5 20,-5 -50,85 -30,15 -70,15" fill="#FFFFFF" />
-  </g>
+  <!-- AD Monogram (Artisan Chiseled) -->
+  <text x="60" y="62" font-family="'Cinzel', 'Palatino', 'Georgia', serif" font-size="30" font-weight="bold" 
+        fill="url(#gold-grad)" text-anchor="middle" dominant-baseline="middle" letter-spacing="1">AD</text>
 
-  <!-- "AD" Chunky Cartoon Bubble/Block Text Badge -->
-  <g transform="translate(130, 340)">
-    <!-- Black offset background banner -->
-    <rect x="8" y="8" width="240" height="88" rx="20" fill="#000000" />
-    <rect x="0" y="0" width="240" height="88" rx="20" fill="#00F0FF" stroke="#000000" stroke-width="9" />
-    <text x="120" y="62" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="62" fill="#000000" text-anchor="middle" letter-spacing="2">AD</text>
-    <text x="116" y="58" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="62" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">AD</text>
-  </g>
-
-  <!-- "CREDIT BY ADAMDEVNOOB" Sub-banner Ribbon -->
-  <g transform="translate(66, 436)">
-    <rect x="4" y="4" width="370" height="34" rx="10" fill="#000000" />
-    <rect x="0" y="0" width="370" height="34" rx="10" fill="#FF0055" stroke="#000000" stroke-width="5" />
-    <text x="185" y="23" font-family="'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">⚡ CREDIT BY ADAMDEVNOOB ⚡</text>
-  </g>
+  <!-- Small Stars / Diamond Accents -->
+  <polygon points="60,78 62,82 66,84 62,86 60,90 58,86 54,84 58,82" fill="url(#gold-grad)"/>
 </svg>

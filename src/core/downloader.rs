@@ -72,7 +72,11 @@ impl MinecraftDownloader {
             .map_err(|e| format!("Failed to request {}: {}", url, e))?;
 
         if !resp.status().is_success() {
-            return Err(format!("Download failed with status {} for {}", resp.status(), url));
+            return Err(format!(
+                "Download failed with status {} for {}",
+                resp.status(),
+                url
+            ));
         }
 
         let bytes = resp
@@ -105,7 +109,11 @@ impl MinecraftDownloader {
     }
 
     /// Downloads the version package JSON if not already present
-    pub async fn download_version_package(&self, version_id: &str, url: &str) -> Result<PathBuf, String> {
+    pub async fn download_version_package(
+        &self,
+        version_id: &str,
+        url: &str,
+    ) -> Result<PathBuf, String> {
         let dest = self
             .minecraft_dir
             .join("versions")
@@ -128,8 +136,13 @@ impl MinecraftDownloader {
             .join(version_id)
             .join(format!("{}.jar", version_id));
 
-        self.download_file(&artifact.url, &dest, Some(&artifact.sha1), Some(artifact.size))
-            .await?;
+        self.download_file(
+            &artifact.url,
+            &dest,
+            Some(&artifact.sha1),
+            Some(artifact.size),
+        )
+        .await?;
         Ok(dest)
     }
 
@@ -178,7 +191,8 @@ impl MinecraftDownloader {
                 });
             }
 
-            self.download_file(url, dest, Some(sha1), Some(*size)).await?;
+            self.download_file(url, dest, Some(sha1), Some(*size))
+                .await?;
             completed_items.fetch_add(1, Ordering::Relaxed);
         }
 
@@ -224,7 +238,8 @@ impl MinecraftDownloader {
 
             if !obj_dest.exists() || !verify_sha1(&obj_dest, &obj.hash) {
                 let url = format!("{}/{}/{}", ASSET_BASE_URL, prefix, obj.hash);
-                self.download_file(&url, &obj_dest, Some(&obj.hash), Some(obj.size)).await?;
+                self.download_file(&url, &obj_dest, Some(&obj.hash), Some(obj.size))
+                    .await?;
             }
 
             idx += 1;

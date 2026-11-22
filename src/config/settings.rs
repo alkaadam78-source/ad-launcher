@@ -22,6 +22,12 @@ pub struct LauncherSettings {
     pub enable_performance_gc: bool,
     pub window_width: u32,
     pub window_height: u32,
+    #[serde(default)]
+    pub language: String,
+    #[serde(default)]
+    pub first_launch: bool,
+    #[serde(default)]
+    pub demo_mode: bool,
 }
 
 impl Default for LauncherSettings {
@@ -44,6 +50,9 @@ impl Default for LauncherSettings {
             enable_performance_gc: true,
             window_width: 1024,
             window_height: 640,
+            language: "en".to_string(),
+            first_launch: false,
+            demo_mode: false,
         }
     }
 }

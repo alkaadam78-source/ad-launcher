@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=AD Launcher
+Comment=The Art of Minecraft — Dark Baroque Edition
+Exec=ad-launcher
+Icon=ad-launcher
+Terminal=false
+Type=Application
+Categories=Game;
+Keywords=minecraft;game;launcher;fabric;sodium;iris;fps;baroque;
+StartupNotify=true
+StartupWMClass=ad-launcher

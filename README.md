@@ -1,93 +1,107 @@
-# NUX Launcher Linux — Personal Edition
+# ⚡ AD LAUNCHER (Linux Native Edition)
 
-> **High-Performance Native Minecraft Launcher for Debian Linux**  
-> Engineered specifically for Intel Core i3-7100U / Intel HD Graphics 620 / 8 GB RAM targets.
+<div align="center">
 
-![NUX Launcher Linux](assets/icons/nux-launcher.svg)
+![AD Launcher Logo](assets/icons/ad-launcher.png)
 
----
+**Ultra-Fast Native Minecraft Launcher for Linux with Cartoon Neo-Brutalism Aesthetics & Extreme FPS Boost**  
+*Created with ❤️ by **AdamDevnoob***
 
-## Overview
+[![Rust](https://img.shields.io/badge/Rust-2021_Edition-orange?logo=rust&style=for-the-badge)](https://www.rust-lang.org/)
+[![GTK4](https://img.shields.io/badge/GUI-GTK4%20%2B%20Relm4-blue?logo=gnome&style=for-the-badge)](https://gtk.org/)
+[![Platform](https://img.shields.io/badge/Platform-Debian%20%2F%20Ubuntu%20%2F%20Linux-red?logo=linux&style=for-the-badge)](https://www.debian.org/)
+[![License](https://img.shields.io/badge/License-GPL--3.0-green?style=for-the-badge)](LICENSE)
+[![Versions](https://img.shields.io/badge/Minecraft-All%20Versions%20(1.0--1.21.4%2B)-success?style=for-the-badge&logo=minecraft)]()
 
-**NUX Launcher Linux** is an ultra-lightweight, 100% native Linux Minecraft launcher written in **Rust**, **GTK4**, and **Relm4**. It eliminates the massive RAM, CPU, and process overhead of Electron/Chromium-based launchers, providing an instantaneous startup, minimal background resource usage, and a workflow tailored for Minecraft 1.20.1 performance.
-
----
-
-## Key Hardware & Performance Philosophy
-
-Built and benchmarked for Debian Linux on modern budget/laptop hardware:
-
-- **Target CPU**: Intel Core i3-7100U (2 cores, 4 threads @ 2.40GHz)
-- **Target GPU**: Intel HD Graphics 620 (Mesa / Vulkan / OpenGL 4.6)
-- **System Memory**: 8 GB RAM (leaves >= 5 GB free for desktop & OS)
-- **Display Target**: 1366x768 and 1080p responsive scaling
-- **Zero Electron Overhead**: Under 25 MB RAM idle; zero background Chromium helper processes
-- **RAM Guard**: Automatically detects system RAM and prevents JVM over-allocation
-
-### Tuned Hardware Presets:
-
-| Preset | Max RAM | Render Distance | Sim Distance | Max FPS | Target Setup |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **BALANCED** *(Default)* | **3072 MB** | 6 Chunks | 4 Chunks | 120 FPS | Sodium + Iris + Lithium + FerriteCore |
-| **LOW RESOURCE** | **2048 MB** | 4 Chunks | 3 Chunks | 90 FPS | Pure performance, shaders off, low heat |
-| **CUSTOM** | User | Configurable | Configurable | Uncapped | Custom flags and memory allocations |
+</div>
 
 ---
 
-## Feature Matrix
+## 🚀 Overview
 
-### 1. Official Minecraft Engine
-- Direct communication with official Mojang endpoints (`piston-meta.mojang.com`)
-- Version metadata parsing with full Linux x86_64 library rule evaluation
-- Chunked parallel downloader with SHA-1 checksum verification
-- Native library extraction (`natives/` directory)
-- Full JVM and Game argument generator with low-pause G1GC flags
+**AD Launcher** is an ultra-lightweight, 100% native Linux Minecraft launcher built in **Rust** and **GTK4**. Unlike bloated Electron/Chromium-based launchers that eat 400MB+ RAM before Minecraft even starts, AD Launcher runs at under **25 MB RAM idle**, starts up in milliseconds, and provides hardware-level optimizations for modern and low-end hardware.
 
-### 2. Mod Loader & Performance Integration
-- **Fabric**: First-class 1.20.1 integration via Fabric Meta API (`meta.fabricmc.net`)
-- **Sodium**: Next-generation OpenGL replacement renderer
-- **Iris**: Shader loader compatible with modern Sodium pipeline
-- **Lithium**: General-purpose physics, AI, and chunk ticking optimization
-- **FerriteCore**: Heavy memory reduction mod reducing Java heap pressure
-- **Modrinth API v2**: Integrated mod search, version resolution, and 1-click download directly to `mods/`
-- **Quilt & Forge/NeoForge**: Extensible loader profiles
-
-### 3. User Interface (GTK4 + Relm4)
-- **Minimalist Dark Theme**: Black, charcoal (`#121418`), slate (`#1a1d24`), with emerald action accents
-- **No RGB, no neon, no bloat**
-- **7 Main Views**:
-  1. **Home**: Active instance, Java status, RAM allocation, Big Play button, real-time log viewer.
-  2. **Instances**: Create, switch, open game folder, and manage isolated Minecraft profiles.
-  3. **Mods**: List mods, toggle enabled/disabled via `.jar.disabled`, install performance mods from Modrinth.
-  4. **Downloads**: Version manifest browser and complete 1.20.1 asset/library downloader.
-  5. **Settings**: Memory slider, presets, custom Java paths, JVM arguments, and resolution controls.
-  6. **Account**: Secure Microsoft Device Code Flow authentication and offline/local player profiles.
-  7. **About**: Real-time system hardware diagnostics (CPU, GPU, RAM, OS).
-
-### 4. Account Management
-- **Microsoft OAuth 2.0**: RFC 8628 Device Code Flow (`microsoft.com/devicelogin`)
-  - No passwords ever stored or requested
-  - Xbox Live (XBL) & XSTS token exchange
-  - Minecraft license & ownership validation
-- **Local Personal Profile**: Fast offline name selection for LAN or personal offline sessions
+Featuring a signature **Cartoon Neo-Brutalism theme** with punchy outlines, vivid pop colors, dynamic smooth scrolling, and complete access to all **600+ official Minecraft versions**.
 
 ---
 
-## Quick Start
+## ✨ Key Features
 
-### Running from source:
+### 🌐 1. Complete Minecraft Version Catalog (All Versions Supported)
+- **Every Version Ever Released**: One-click download and launch for any official release (**1.21.4, 1.20.1, 1.16.5, 1.12.2, 1.8.9**, down to 1.0), snapshots, and nostalgic retro Beta/Alpha releases directly from Mojang manifest.
+- **Instant Search & Filter**: Real-time reactive search by version ID and category filter (Releases, Snapshots, Retro Beta/Alpha, All).
+- **Fast Multithreaded Downloader**: Automatic library resolution, Linux x86_64 native extractor, and asset verification with SHA-1 checksums.
+
+### 🎨 2. Vibrant Cartoon Neo-Brutalism UI
+- **Zero White Buttons**: Completely customized button palette (Cyber Cyan, Neon Emerald, Electric Yellow, Vivid Purple, Electric Amber, Coral Red).
+- **Custom Neo-Brutalist Scrollbars**: Fluid, chunky scrollbars designed for seamless navigation.
+- **Responsive Layout**: Full screen and windowed modes with dynamic vertical scrolling on every view.
+
+### 🖥️ 3. Fullscreen & Resizability
+- **Fullscreen Mode**: Toggle fullscreen effortlessly with the dedicated UI button or press `F11`.
+- **Resizable**: Adapts beautifully to laptop screens (1366x768), 1080p, 1440p, and 4K displays.
+
+### ⚡ 4. Adam Turbo Extreme FPS Boost (Tuned for Intel HD 620 & i3)
+- Tuned for Intel Core i3-7100U / Intel HD Graphics 620 / 8 GB RAM Debian Linux targets.
+- Pre-configured presets:
+  - **🚀 HYPER BOOST (ADAM TURBO - 240 FPS)**: Low-pause G1GC flags, multi-threaded OpenGL, RAM-guard protection.
+  - **★ BALANCED (3 GB, 6 Chunks)**: Perfect sweet spot for Sodium + Iris + Lithium.
+  - **⚡ LOW RESOURCE (2 GB, 4 Chunks)**: Maximum battery saver and cool thermals for potato laptops.
+
+### 🧩 5. Built-in Modding & Shaders (Modrinth API v2)
+- Direct Modrinth integration: search, download, and install performance mods (Sodium, Iris, Lithium, FerriteCore) with 1 click.
+- Integrated **Shader Center** and **Shader Lab**: Toggle shaders, test compatibility, and apply potato calibrations.
+
+### 🔐 6. Account Management
+- **Official Microsoft OAuth 2.0**: Secure Device Code Flow (`microsoft.com/devicelogin`). Zero passwords stored locally.
+- **Offline / Local Profiles**: One-click setup for LAN parties and offline play.
+
+---
+
+## 🛠️ Building & Installation
+
+### Prerequisites
+On Debian / Ubuntu / Linux Mint:
 ```bash
-cargo run --release
+sudo apt update
+sudo apt install -y build-essential libgtk-4-dev libssl-dev pkg-config openjdk-21-jre
 ```
 
-### Direct command-line launch:
+### Build from Source
 ```bash
-nux-launcher --launch
+# Clone the repository
+git clone https://github.com/AdamDevnoob/ad-launcher.git
+cd ad-launcher
+
+# Run development build
+cargo run
+
+# Build optimized production release binary
+cargo build --release
 ```
+The compiled binary will be located at `target/release/nux-launcher`.
 
 ---
 
-## License
+## 🎮 Shortcuts & Controls
 
-NUX Launcher Linux is licensed under the **GNU General Public License v3.0** (`GPL-3.0-or-later`).
-See [LICENSE](LICENSE) for details.
+| Shortcut / Control | Action |
+| :--- | :--- |
+| `F11` | Toggle Fullscreen / Windowed mode |
+| `Search Box` (Downloads) | Instantly filter 600+ Minecraft versions |
+| `Big Play Button` | One-click launch with active profile and Turbo optimizations |
+
+---
+
+## 📜 License
+
+This project is licensed under the **GNU General Public License v3.0** (`GPL-3.0-or-later`).  
+See the [LICENSE](LICENSE) file for more information.
+
+---
+
+<div align="center">
+
+**⚡ Built with passion by AdamDevnoob ⚡**
+
+</div>

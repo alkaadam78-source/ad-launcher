@@ -1,1 +1,12 @@
 /target
+*.deb
+*.AppImage
+*.zip
+*.tar.gz
+*.tmp
+*.log
+.minecraft/
+.idea/
+.vscode/
+*.swp
+*~

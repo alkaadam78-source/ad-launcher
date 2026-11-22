@@ -1,4 +1,4 @@
-use nux_launcher::config::presets::OptimizationPreset;
+use ad_launcher::config::presets::OptimizationPreset;
 
 #[test]
 fn test_balanced_preset_parameters() {
@@ -26,5 +26,7 @@ fn test_hyper_boost_preset_parameters() {
     assert_eq!(preset.render_distance(), 5);
     assert_eq!(preset.max_fps(), 240);
     assert!(preset.recommended_jvm_flags().contains("UseG1GC"));
-    assert!(preset.recommended_jvm_flags().contains("MaxGCPauseMillis=15"));
+    assert!(preset
+        .recommended_jvm_flags()
+        .contains("MaxGCPauseMillis=15"));
 }

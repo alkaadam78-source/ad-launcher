@@ -141,7 +141,10 @@ impl InstanceManager {
     }
 
     pub fn create_instance(&self, inst: &Instance) -> rusqlite::Result<()> {
-        let java_str = inst.java_path.as_ref().map(|p| p.to_string_lossy().to_string());
+        let java_str = inst
+            .java_path
+            .as_ref()
+            .map(|p| p.to_string_lossy().to_string());
         self.conn.execute(
             "INSERT INTO instances (id, name, mc_version, loader, loader_version, ram_mb, game_dir, java_path, created_at, last_played_at)
              VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
@@ -171,7 +174,8 @@ impl InstanceManager {
     }
 
     pub fn delete_instance(&self, id: &str) -> rusqlite::Result<()> {
-        self.conn.execute("DELETE FROM instances WHERE id = ?1", params![id])?;
+        self.conn
+            .execute("DELETE FROM instances WHERE id = ?1", params![id])?;
         Ok(())
     }
 }

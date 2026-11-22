@@ -1,373 +1,610 @@
 /* ==========================================================================
-   AD LAUNCHER — CARTOON NEO-BRUTALISM THEME
-   Credit By AdamDevnoob
-   High-Contrast, Chunky Outlines, Hard Shadows, Vibrant Pop Colors & Animations
+   AD LAUNCHER — THE DARK BAROQUE EDITION
+   Baroque Decorative Placement System
+   "Keep the Art. Organize the Ornaments. Simplify the Interactions."
    ========================================================================== */
 
-/* Keyframe Animations */
-@keyframes cartoon-float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-3px); }
-    100% { transform: translateY(0px); }
-}
+/* --------------------------------------------------------------------------
+   1. GLOBAL CANVAS & BACKGROUND CHIAROSCURO (Rule 7)
+   -------------------------------------------------------------------------- */
 
-@keyframes turbo-pulse {
-    0% {
-        box-shadow: 4px 4px 0px #000000;
-        background-color: #ffe600;
-    }
-    50% {
-        box-shadow: 6px 6px 0px #000000;
-        background-color: #00ff88;
-    }
-    100% {
-        box-shadow: 4px 4px 0px #000000;
-        background-color: #ffe600;
-    }
-}
-
-@keyframes badge-wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(-2deg); }
-    75% { transform: rotate(2deg); }
-    100% { transform: rotate(0deg); }
-}
-
-/* Global Window */
 window {
-    background-color: #12131a;
-    color: #ffffff;
-    font-family: "Impact", "Arial Black", "Montserrat", "Segoe UI", sans-serif;
+    background: radial-gradient(ellipse at 50% 0%, #181210 0%, #100D0C 75%);
+    color: #E8DDCC;
+    font-family: "Inter", "Cantarell", "DejaVu Sans", "Segoe UI", sans-serif;
     font-size: 13px;
+    letter-spacing: 0.2px;
 }
 
-/* Sidebar Navigation */
+.view-scroller, .content-scroll, scrolledwindow {
+    background-color: transparent;
+}
+
+.content-area {
+    background-color: transparent;
+    padding: 24px 32px 32px 32px;
+}
+
+/* Classical Chiaroscuro Scrollbars */
+scrollbar {
+    background-color: transparent;
+    padding: 2px;
+}
+
+scrollbar trough {
+    background-color: #171210;
+    border: 1px solid #281E19;
+    border-radius: 4px;
+    min-width: 8px;
+}
+
+scrollbar slider {
+    background-color: #523C22;
+    border: 1px solid #78582F;
+    border-radius: 3px;
+    min-width: 6px;
+    min-height: 24px;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+scrollbar slider:hover {
+    background-color: #B08A48;
+    border-color: #D6B675;
+}
+
+scrollbar slider:active {
+    background-color: #D6B675;
+}
+
+/* --------------------------------------------------------------------------
+   2. ORNAMENTAL PLACEMENT SYSTEM — SEPARATORS & DIVIDERS (Rules 1 & 2)
+   -------------------------------------------------------------------------- */
+
+.ornamental-separator-box {
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+/* Thin Antique-Gold Lines with Symmetrical Baroque Centerpoint (Rule 2) */
+separator.divider-line, .divider-line {
+    background: linear-gradient(90deg, rgba(120, 88, 47, 0.05) 0%, #78582F 45%, #B08A48 85%, #78582F 100%);
+    min-height: 1px;
+    border: none;
+    opacity: 0.65;
+}
+
+.divider-ornament {
+    color: #B08A48;
+    font-size: 13px;
+    padding: 0 8px;
+    text-shadow: 0 0 6px rgba(214, 182, 117, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   3. SIDEBAR NAVIGATION — MINIMALIST CONTROLS WITH REFINED BRANDING (Rule 5)
+   -------------------------------------------------------------------------- */
+
+.sidebar-scroll {
+    background-color: #15100E;
+    border-right: 1px solid #281E19;
+}
+
 .sidebar {
-    background-color: #1a1b26;
-    border-right: 3.5px solid #000000;
-    padding: 14px 10px;
+    background-color: #15100E;
+    padding: 18px 12px 16px 12px;
 }
 
+/* Brand Header with Small Symmetrical Ornaments */
 .sidebar-title-box {
-    background-color: #ffe600;
-    border: 3px solid #000000;
-    border-radius: 12px;
-    box-shadow: 4px 4px 0px #000000;
-    padding: 8px 12px;
-    margin-bottom: 6px;
-    transition: all 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.sidebar-title-box:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px #000000;
+    background: linear-gradient(180deg, #241A16 0%, #1A1310 100%);
+    border: 1px solid #523C22;
+    border-radius: 5px;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(214, 182, 117, 0.12);
 }
 
 .sidebar-title {
-    font-size: 16px;
-    font-weight: 900;
-    color: #000000;
-    letter-spacing: 1px;
+    font-family: "Cinzel", "Cormorant Garamond", "Palatino", "Georgia", serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #E3D0A6;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-/* AdamDevnoob Credit Ribbon */
+.sidebar-subtitle {
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 10.5px;
+    font-style: italic;
+    color: #B6A793;
+    letter-spacing: 0.8px;
+}
+
 .adam-credit-badge {
-    background-color: #ff0055;
-    color: #ffffff;
-    border: 2.5px solid #000000;
-    border-radius: 8px;
-    box-shadow: 3px 3px 0px #000000;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    padding: 4px 8px;
+    background: #1E1613;
+    color: #C4A568;
+    border: 1px solid #483428;
+    border-radius: 3px;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 11px;
+    font-style: italic;
+    letter-spacing: 0.6px;
+    padding: 2px 10px;
+    margin-top: 2px;
     margin-bottom: 12px;
-    transition: all 180ms ease-in-out;
 }
 
-.adam-credit-badge:hover {
-    background-color: #00f0ff;
-    color: #000000;
-    transform: rotate(-1deg) scale(1.02);
-    box-shadow: 4px 4px 0px #000000;
-}
-
-/* Nav Buttons (Neo-Brutalist Chunky Buttons) */
+/* Clean, Minimalist Navigation Buttons (Rule 5 & Rule 10) */
 .nav-btn {
-    background-color: #242636;
-    border: 2.5px solid #000000;
-    border-radius: 10px;
-    color: #cbd5e1;
-    padding: 9px 12px;
-    margin: 3px 0;
-    font-size: 12px;
-    font-weight: 800;
-    box-shadow: 3px 3px 0px #000000;
-    transition: all 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: transparent;
+    color: #B6A793;
+    border: 1px solid transparent;
+    border-left: 2px solid transparent;
+    border-radius: 3px;
+    font-family: "Inter", sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    padding: 8px 12px;
+    margin-bottom: 2px;
+    transition: all 120ms ease;
 }
 
 .nav-btn:hover {
-    background-color: #2e3146;
-    color: #ffffff;
-    transform: translate(-1.5px, -1.5px);
-    box-shadow: 4.5px 4.5px 0px #000000;
+    background: #1E1613;
+    color: #E8DDCC;
+    border-color: #2D201A;
 }
 
 .nav-btn.active {
-    background-color: #00f0ff;
-    border: 2.5px solid #000000;
-    color: #000000;
-    font-weight: 900;
-    box-shadow: 4px 4px 0px #000000;
-    transform: translate(-1px, -1px);
+    background: #241A16;
+    color: #E3D0A6;
+    border-left: 2px solid #D6B675;
+    border-top: 1px solid #382820;
+    border-right: 1px solid #241A16;
+    border-bottom: 1px solid #241A16;
+    font-weight: 600;
 }
 
-/* Content Area */
-.content-area {
-    background-color: #12131a;
-    padding: 24px 28px;
+.btn-fullscreen {
+    background: #1C1412;
+    color: #B6A793;
+    border: 1px solid #30231D;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 10px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    transition: all 120ms ease;
 }
+
+.btn-fullscreen:hover {
+    background: #251B17;
+    color: #D6B675;
+    border-color: #523C22;
+}
+
+/* --------------------------------------------------------------------------
+   4. EDITORIAL TYPOGRAPHY & HEADINGS (Rule 1)
+   -------------------------------------------------------------------------- */
 
 .page-title {
-    font-size: 24px;
-    font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 0.5px;
+    font-family: "Cinzel", "Cormorant Garamond", "Palatino", "Georgia", serif;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #E3D0A6;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     margin-bottom: 2px;
 }
 
 .page-subtitle {
-    font-size: 12px;
-    font-weight: 700;
-    color: #a0aec0;
-    margin-bottom: 16px;
-}
-
-/* Cards (Neo-Brutalist Chunky Cartoon Cards) */
-.card {
-    background-color: #1c1d29;
-    border: 3.5px solid #000000;
-    border-radius: 14px;
-    box-shadow: 6px 6px 0px #000000;
-    padding: 18px 20px;
-    margin-bottom: 16px;
-    transition: all 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.card:hover {
-    transform: translate(-1.5px, -1.5px);
-    box-shadow: 8px 8px 0px #000000;
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 13.5px;
+    font-style: italic;
+    color: #B6A793;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
 }
 
 .card-title {
-    font-size: 14px;
-    font-weight: 900;
-    color: #ffe600;
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
+    font-family: "Cinzel", "Palatino", "Georgia", serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #D6B675;
+    margin-bottom: 6px;
 }
 
-/* Highlight Banner Card */
+/* --------------------------------------------------------------------------
+   5. CARDS — SUBTLE CORNER DETAILS, CLEAN INTERIOR (Rule 3)
+   -------------------------------------------------------------------------- */
+
+.card {
+    background-color: #171210;
+    border: 1px solid #2E221C;
+    /* Subtle decorative corner detail on top-left (Rule 3) */
+    border-top: 1px solid #483428;
+    border-left: 1px solid #3A2A20;
+    border-radius: 4px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(214, 182, 117, 0.04);
+    transition: border-color 150ms ease;
+}
+
+.card:hover {
+    border-color: #3E2E25;
+    border-top-color: #5A4232;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Hero & Major Feature Sections — Richer Baroque Framing (Rule 4) */
 .banner-card {
-    background-color: #ff0055;
-    border: 3.5px solid #000000;
-    border-radius: 14px;
-    box-shadow: 6px 6px 0px #000000;
+    background: linear-gradient(135deg, #241815 0%, #1A1310 60%, #150E0C 100%);
+    border: 1px solid #78582F;
+    border-top: 1px solid #B08A48;
+    border-radius: 5px;
     padding: 14px 18px;
-    margin-bottom: 16px;
-    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(227, 208, 166, 0.15);
 }
 
 .banner-title {
-    font-size: 15px;
-    font-weight: 900;
-    color: #ffffff;
-}
-
-/* Play / Launch Button (Giant Cartoon Booster) */
-.btn-play {
-    background-color: #ffe600;
-    color: #000000;
-    font-size: 18px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    padding: 14px 32px;
-    border: 4px solid #000000;
-    border-radius: 14px;
-    box-shadow: 6px 6px 0px #000000;
-    transition: all 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.btn-play:hover {
-    background-color: #00ff88;
-    color: #000000;
-    transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0px #000000;
-}
-
-.btn-play:active {
-    transform: translate(3px, 3px);
-    box-shadow: 1px 1px 0px #000000;
-}
-
-.btn-play:disabled {
-    background-color: #3f4255;
-    color: #717790;
-    border-color: #1a1b24;
-    box-shadow: 2px 2px 0px #000000;
-    transform: none;
-}
-
-/* Primary Action Buttons */
-.btn-primary {
-    background-color: #00f0ff;
-    color: #000000;
-    font-weight: 900;
-    border-radius: 10px;
-    padding: 9px 18px;
-    border: 3px solid #000000;
-    box-shadow: 4px 4px 0px #000000;
-    transition: all 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.btn-primary:hover {
-    background-color: #ffe600;
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px #000000;
-}
-
-.btn-primary:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px #000000;
-}
-
-/* Secondary Action Buttons */
-.btn-secondary {
-    background-color: #27293a;
-    color: #ffffff;
-    font-weight: 800;
-    border-radius: 10px;
-    padding: 8px 14px;
-    border: 2.5px solid #000000;
-    box-shadow: 3px 3px 0px #000000;
-    transition: all 120ms ease;
-}
-
-.btn-secondary:hover {
-    background-color: #35384e;
-    transform: translate(-1.5px, -1.5px);
-    box-shadow: 4.5px 4.5px 0px #000000;
-}
-
-.btn-secondary:active {
-    transform: translate(1.5px, 1.5px);
-    box-shadow: 1px 1px 0px #000000;
-}
-
-/* Danger Buttons */
-.btn-danger {
-    background-color: #ff0055;
-    color: #ffffff;
-    font-weight: 900;
-    border-radius: 10px;
-    padding: 7px 14px;
-    border: 2.5px solid #000000;
-    box-shadow: 3px 3px 0px #000000;
-    transition: all 120ms ease;
-}
-
-.btn-danger:hover {
-    background-color: #d60047;
-    transform: translate(-1.5px, -1.5px);
-    box-shadow: 4.5px 4.5px 0px #000000;
-}
-
-/* Form Inputs & Dropdowns */
-entry, dropdown {
-    background-color: #1a1b26;
-    border: 3px solid #000000;
-    border-radius: 10px;
-    color: #ffffff;
-    padding: 8px 12px;
-    box-shadow: 3px 3px 0px #000000;
-    font-weight: 700;
-}
-
-entry:focus, dropdown:focus {
-    border-color: #00f0ff;
-    box-shadow: 5px 5px 0px #000000;
-}
-
-/* Badges & Stickers (Neo-Brutalist Cartoon Badges) */
-.badge-ready {
-    background-color: #00ff88;
-    color: #000000;
-    border: 2px solid #000000;
-    border-radius: 8px;
-    box-shadow: 2px 2px 0px #000000;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 900;
+    font-family: "Cinzel", "Cormorant Garamond", "Georgia", serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #E3D0A6;
     letter-spacing: 0.5px;
 }
 
-.badge-info {
-    background-color: #00f0ff;
-    color: #000000;
-    border: 2px solid #000000;
-    border-radius: 8px;
-    box-shadow: 2px 2px 0px #000000;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 900;
+/* --------------------------------------------------------------------------
+   6. SIMPLE, MODERN, MINIMALIST BUTTONS (Rule 10)
+   -------------------------------------------------------------------------- */
+
+button {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: 7px 14px;
+    border: 1px solid transparent;
+    transition: all 120ms ease;
 }
 
-.badge-turbo {
-    background-color: #ffe600;
-    color: #000000;
-    border: 2px solid #000000;
-    border-radius: 8px;
-    box-shadow: 2px 2px 0px #000000;
-    padding: 4px 10px;
+/* Master Launch Button — Minimalist Luxury (Deep Burgundy + Fine Gold Border) */
+.btn-play {
+    background: linear-gradient(180deg, #7A283B 0%, #5E1F2D 100%);
+    color: #FFFFFF;
+    border: 1px solid #B08A48;
+    font-family: "Cinzel", "Palatino", serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    padding: 11px 22px;
+    box-shadow: 0 2px 8px rgba(107, 38, 56, 0.35);
+}
+
+.btn-play:hover {
+    background: linear-gradient(180deg, #8E2F45 0%, #6E2536 100%);
+    border-color: #D6B675;
+    box-shadow: 0 4px 14px rgba(107, 38, 56, 0.5);
+}
+
+.btn-play:active {
+    background: #4A1924;
+    box-shadow: none;
+}
+
+.btn-play:disabled {
+    background: #201815;
+    color: #655B52;
+    border-color: #30231D;
+    box-shadow: none;
+}
+
+/* Modern Minimalist Secondary / Action Buttons */
+.btn-cyan, .btn-primary {
+    background: #221915;
+    color: #D6B675;
+    border: 1px solid #523C22;
+}
+
+.btn-cyan:hover, .btn-primary:hover {
+    background: #2C201B;
+    color: #E3D0A6;
+    border-color: #78582F;
+}
+
+.btn-cyan:active, .btn-primary:active {
+    background: #1A1310;
+}
+
+.btn-amber {
+    background: #221A13;
+    color: #E3D0A6;
+    border: 1px solid #63421C;
+}
+
+.btn-amber:hover {
+    background: #2D2319;
+    border-color: #8C5A20;
+}
+
+.btn-purple {
+    background: #22151B;
+    color: #E8DDCC;
+    border: 1px solid #4D202D;
+}
+
+.btn-purple:hover {
+    background: #2D1C24;
+    border-color: #6B2638;
+}
+
+.btn-emerald {
+    background: #152219;
+    color: #BFE3CA;
+    border: 1px solid #2B4E38;
+}
+
+.btn-emerald:hover {
+    background: #1C2D22;
+    border-color: #3F7A54;
+}
+
+.btn-danger {
+    background: #241416;
+    color: #E27B88;
+    border: 1px solid #5C2028;
+}
+
+.btn-danger:hover {
+    background: #2F1A1D;
+    border-color: #7A2834;
+}
+
+.btn-secondary {
+    background: #1E1614;
+    color: #B6A793;
+    border: 1px solid #2E221D;
+}
+
+.btn-secondary:hover {
+    background: #251B18;
+    color: #E8DDCC;
+    border-color: #3E2E27;
+}
+
+/* Filter Chips (Minimalist Pill Buttons) */
+.filter-btn {
+    background: #171210;
+    color: #B6A793;
+    border: 1px solid #2E221D;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 3px 10px;
+    transition: all 120ms ease;
+}
+
+.filter-btn:hover {
+    background: #201815;
+    color: #D6B675;
+    border-color: #523C22;
+}
+
+.filter-btn.active {
+    background: #281E19;
+    color: #E3D0A6;
+    border-color: #78582F;
+}
+
+/* --------------------------------------------------------------------------
+   7. STATUS BADGES & MEDALLIONS (Rule 9)
+   -------------------------------------------------------------------------- */
+
+.badge-ready {
+    background-color: #142017;
+    color: #7CC492;
+    border: 1px solid #264A31;
+    border-radius: 3px;
     font-size: 11px;
-    font-weight: 900;
+    font-weight: 600;
+    padding: 2px 7px;
 }
 
 .badge-warning {
-    background-color: #ff9900;
-    color: #000000;
-    border: 2px solid #000000;
-    border-radius: 8px;
-    box-shadow: 2px 2px 0px #000000;
-    padding: 4px 10px;
+    background-color: #24180A;
+    color: #E0AB60;
+    border: 1px solid #5E3E18;
+    border-radius: 3px;
     font-size: 11px;
-    font-weight: 900;
+    font-weight: 600;
+    padding: 2px 7px;
 }
 
-/* Progress Bar (Cartoon Neon Stripes) */
+.badge-turbo {
+    background: #24150D;
+    color: #E3D0A6;
+    border: 1px solid #78582F;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+}
+
+.badge-info {
+    background-color: #141A20;
+    color: #92B1D0;
+    border: 1px solid #223040;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+}
+
+/* --------------------------------------------------------------------------
+   8. TASTEFUL EMPTY STATES (Rule 8)
+   -------------------------------------------------------------------------- */
+
+.empty-state-card {
+    background: rgba(23, 18, 16, 0.4);
+    border: 1px dashed #3D2D24;
+    border-radius: 6px;
+    padding: 32px 48px;
+    margin: 20px 0;
+}
+
+.empty-state-icon {
+    font-size: 28px;
+    color: #B08A48;
+    margin-bottom: 6px;
+}
+
+.empty-state-title {
+    font-family: "Cinzel", "Palatino", serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #E3D0A6;
+    margin-bottom: 4px;
+}
+
+.empty-state-subtitle {
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    font-size: 12.5px;
+    font-style: italic;
+    color: #B6A793;
+}
+
+/* --------------------------------------------------------------------------
+   9. FORM CONTROLS & PARCHMENT INPUTS
+   -------------------------------------------------------------------------- */
+
+entry {
+    background-color: #130E0C;
+    color: #E8DDCC;
+    border: 1px solid #2E221D;
+    border-radius: 3px;
+    padding: 6px 10px;
+    font-size: 12px;
+    transition: border-color 120ms ease;
+}
+
+entry:focus {
+    border-color: #78582F;
+}
+
+entry placeholder {
+    color: #655B52;
+    font-style: italic;
+}
+
+/* Checkbuttons */
+checkbutton {
+    color: #E8DDCC;
+    font-size: 12.5px;
+}
+
+checkbutton check {
+    background-color: #130E0C;
+    border: 1px solid #523C22;
+    border-radius: 3px;
+    min-width: 15px;
+    min-height: 15px;
+    margin-right: 8px;
+}
+
+checkbutton check:checked {
+    background-color: #6B2638;
+    border-color: #B08A48;
+    color: #E3D0A6;
+}
+
+/* Scale / Sliders */
+scale trough {
+    background-color: #171210;
+    border: 1px solid #2E221D;
+    border-radius: 3px;
+    min-height: 5px;
+}
+
+scale highlight {
+    background: linear-gradient(90deg, #78582F 0%, #B08A48 100%);
+    border-radius: 3px;
+}
+
+scale slider {
+    background: #D6B675;
+    border: 1px solid #78582F;
+    border-radius: 50%;
+    min-width: 15px;
+    min-height: 15px;
+}
+
+scale slider:hover {
+    background: #E3D0A6;
+    border-color: #B08A48;
+}
+
+/* Progress Bars */
 progressbar trough {
-    background-color: #1a1b26;
-    border: 2.5px solid #000000;
-    border-radius: 8px;
-    box-shadow: 3px 3px 0px #000000;
-    min-height: 16px;
+    background-color: #171210;
+    border: 1px solid #2E221D;
+    border-radius: 3px;
+    min-height: 6px;
 }
 
 progressbar progress {
-    background-color: #00ff88;
-    border-radius: 6px;
-    border-right: 2px solid #000000;
+    background: linear-gradient(90deg, #78582F 0%, #B08A48 80%, #D6B675 100%);
+    border-radius: 3px;
 }
 
-/* Console Logs */
-.log-view {
-    background-color: #0b0c12;
-    color: #00ff88;
-    font-family: "DejaVu Sans Mono", "Fira Code", monospace;
-    font-size: 11px;
-    font-weight: 600;
-    border-radius: 10px;
-    border: 3px solid #000000;
-    box-shadow: 4px 4px 0px #000000;
-    padding: 10px;
+/* Lists & Rows */
+list {
+    background-color: transparent;
+}
+
+row {
+    background-color: #171210;
+    border: 1px solid #2A1F1A;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    padding: 8px 12px;
+    transition: background-color 100ms ease;
+}
+
+row:hover {
+    background-color: #1E1613;
+    border-color: #483428;
+}
+
+row:selected {
+    background-color: #241A16;
+    border-color: #78582F;
+}
+
+/* Activity Log View */
+.log-view, textview {
+    background-color: #0D0A09;
+    color: #CBB07B;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 11.5px;
+    line-height: 1.45;
+    padding: 8px 10px;
+    border: 1px solid #1F1714;
+    border-radius: 3px;
+}
+
+textview text {
+    background-color: #0D0A09;
+    color: #CBB07B;
+}
+
+/* Modal Windows & Dialogs (Rule 6) */
+window.dialog, .modal-box {
+    background-color: #171210;
+    border: 1px solid #78582F;
+    border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
 }

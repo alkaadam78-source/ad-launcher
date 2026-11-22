@@ -1,4 +1,4 @@
-use nux_launcher::utils::crypto::{bytes_sha1, verify_sha1};
+use ad_launcher::utils::crypto::{bytes_sha1, verify_sha1};
 use std::io::Write;
 
 #[test]
@@ -21,7 +21,10 @@ fn test_file_sha1_verification() {
     drop(f);
 
     assert!(verify_sha1(&test_file, &expected_hash));
-    assert!(!verify_sha1(&test_file, "0000000000000000000000000000000000000000"));
+    assert!(!verify_sha1(
+        &test_file,
+        "0000000000000000000000000000000000000000"
+    ));
 
     let _ = std::fs::remove_file(test_file);
 }

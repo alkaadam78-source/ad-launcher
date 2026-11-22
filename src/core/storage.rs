@@ -33,7 +33,8 @@ impl StorageIntelligence {
         let mut breakdown = StorageBreakdown::default();
 
         // 1. Assets
-        let (assets_size, assets_count) = Self::dir_stats(&self.minecraft_dir.join("assets").join("objects"));
+        let (assets_size, assets_count) =
+            Self::dir_stats(&self.minecraft_dir.join("assets").join("objects"));
         breakdown.assets_mb = (assets_size as f64) / (1024.0 * 1024.0);
         breakdown.assets_count = assets_count;
 
@@ -52,7 +53,8 @@ impl StorageIntelligence {
         breakdown.mods_count = mods_count;
 
         // 5. Shaders
-        let (shaders_size, shaders_count) = Self::dir_stats(&self.minecraft_dir.join("shaderpacks"));
+        let (shaders_size, shaders_count) =
+            Self::dir_stats(&self.minecraft_dir.join("shaderpacks"));
         breakdown.shaders_mb = (shaders_size as f64) / (1024.0 * 1024.0);
         breakdown.shaders_count = shaders_count;
 

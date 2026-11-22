@@ -1,4 +1,4 @@
-use nux_launcher::core::manifest::Library;
+use ad_launcher::core::manifest::Library;
 
 #[test]
 fn test_library_rule_evaluation() {
@@ -23,5 +23,8 @@ fn test_library_artifact_path_generation() {
         natives: None,
     };
     let path = lib.artifact_path().unwrap();
-    assert_eq!(path, "net/fabricmc/fabric-loader/0.15.11/fabric-loader-0.15.11.jar");
+    assert_eq!(
+        path,
+        "net/fabricmc/fabric-loader/0.15.11/fabric-loader-0.15.11.jar"
+    );
 }

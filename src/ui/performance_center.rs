@@ -1,4 +1,5 @@
 use crate::core::fps_booster::FpsOptimizationMode;
+use crate::ui::components::{create_page_header, create_section_divider};
 use crate::utils::system::SystemSpecs;
 use gtk4::prelude::*;
 use gtk4::{Box as GtkBox, Button, Label, Orientation};
@@ -17,52 +18,42 @@ impl PerformanceCenterView {
         let container = GtkBox::new(Orientation::Vertical, 16);
         container.set_css_classes(&["content-area"]);
 
-        // Page Header
-        let header_row = GtkBox::new(Orientation::Horizontal, 12);
-        let title_col = GtkBox::new(Orientation::Vertical, 2);
+        // Page Header with Subtle Ornamental Separator (Rule 1)
+        let header = create_page_header(
+            "ROYAL PERFORMANCE LAB & TELEMETRY",
+            "Real-time hardware telemetry and classical optimization treatises",
+        );
+        container.append(&header);
 
-        let title = Label::new(Some("⚡ PERFORMANCE CENTER & FPS BOOSTER"));
-        title.set_css_classes(&["page-title"]);
-        title.set_halign(gtk4::Align::Start);
-
-        let subtitle = Label::new(Some("Intel Core i3-7100U + HD 620 Hyper-Tuning & Instant Optimization Modes"));
-        subtitle.set_css_classes(&["page-subtitle"]);
-        subtitle.set_halign(gtk4::Align::Start);
-
-        title_col.append(&title);
-        title_col.append(&subtitle);
-        header_row.append(&title_col);
-
-        let credit_badge = Label::new(Some("⚡ CREDIT BY ADAMDEVNOOB ⚡"));
-        credit_badge.set_css_classes(&["adam-credit-badge"]);
-        credit_badge.set_halign(gtk4::Align::End);
-        credit_badge.set_hexpand(true);
-        credit_badge.set_valign(gtk4::Align::Center);
-        header_row.append(&credit_badge);
-
-        container.append(&header_row);
-
-        // Feedback label for applied modes
-        let feedback_label = Label::new(Some("Select an FPS optimization mode below to apply instant tuning."));
-        feedback_label.set_css_classes(&["badge-ready"]);
-        feedback_label.set_halign(gtk4::Align::Start);
+        // Feedback / Notification Banner
+        let feedback_label = Label::new(Some(
+            "Optimization Lab: Select an optimization treatise below to apply configuration.",
+        ));
+        feedback_label.set_css_classes(&["banner-card"]);
+        feedback_label.set_halign(gtk4::Align::Fill);
         container.append(&feedback_label);
 
-        // Telemetry Card
+        // Scientific Instrument Telemetry Card (Rule 9: Hierarchy accent)
         let telemetry_card = GtkBox::new(Orientation::Vertical, 10);
         telemetry_card.set_css_classes(&["card"]);
 
-        let t_title = Label::new(Some("SYSTEM TELEMETRY & HARDWARE TARGET"));
+        let t_title = Label::new(Some("PHILOSOPHICAL INSTRUMENT TELEMETRY & HARDWARE TARGET"));
         t_title.set_css_classes(&["card-title"]);
         t_title.set_halign(gtk4::Align::Start);
         telemetry_card.append(&t_title);
 
         let row1 = GtkBox::new(Orientation::Horizontal, 12);
-        let cpu_badge = Label::new(Some(&format!("CPU: {} ({} Cores)", specs.cpu_name, specs.cpu_cores)));
+        let cpu_badge = Label::new(Some(&format!(
+            "CPU: {} ({} Cores)",
+            specs.cpu_name, specs.cpu_cores
+        )));
         cpu_badge.set_css_classes(&["badge-info"]);
-        let gpu_badge = Label::new(Some("GPU: Intel HD Graphics 620 (Mesa 4.6 glthread=ON)"));
+        let gpu_badge = Label::new(Some("GPU: Intel HD Graphics 620 (Mesa glthread=ON)"));
         gpu_badge.set_css_classes(&["badge-turbo"]);
-        let ram_badge = Label::new(Some(&format!("RAM: {} MB / Safe Max: {} MB", specs.total_memory_mb, specs.max_safe_ram_mb)));
+        let ram_badge = Label::new(Some(&format!(
+            "RAM: {} MB / Safe Max: {} MB",
+            specs.total_memory_mb, specs.max_safe_ram_mb
+        )));
         ram_badge.set_css_classes(&["badge-ready"]);
 
         row1.append(&cpu_badge);
@@ -71,7 +62,7 @@ impl PerformanceCenterView {
         telemetry_card.append(&row1);
 
         let t_desc = Label::new(Some(
-            "Mesa multi-threaded OpenGL command queue (`mesa_glthread=true`) is active. Bypasses driver overhead and unlocks 120-200+ FPS."
+            "Mesa multi-threaded OpenGL command queue (`mesa_glthread=true`) is active. Eliminates driver bottlenecks and maximizes frame throughput on integrated graphics."
         ));
         t_desc.set_css_classes(&["page-subtitle"]);
         t_desc.set_wrap(true);
@@ -80,8 +71,11 @@ impl PerformanceCenterView {
 
         container.append(&telemetry_card);
 
-        // MODE OPTIMASI FPS (4 Cartoon Neo-Brutalist Cards)
-        let modes_title = Label::new(Some("🔥 MODE OPTIMASI FPS (PILIH PROFIL KINERJA)"));
+        // Section Divider (Rule 2)
+        container.append(&create_section_divider());
+
+        // Performance Optimization Modes
+        let modes_title = Label::new(Some("OPTIMIZATION TREATISES (SELECT PERFORMANCE REGIME)"));
         modes_title.set_css_classes(&["card-title"]);
         modes_title.set_halign(gtk4::Align::Start);
         container.append(&modes_title);
@@ -92,8 +86,8 @@ impl PerformanceCenterView {
         // Mode 1: Adam Hyper Potato
         let (card1, apply_hyper_potato_btn) = Self::create_mode_card(
             FpsOptimizationMode::AdamHyperPotato,
-            "⚡ 200+ FPS",
-            "btn-primary",
+            "⚡ 200+ FPS (POTATO ALCHEMY)",
+            "btn-play",
         );
         card1.set_hexpand(true);
         grid_row1.append(&card1);
@@ -101,8 +95,8 @@ impl PerformanceCenterView {
         // Mode 2: Adam Shader Smooth
         let (card2, apply_shader_smooth_btn) = Self::create_mode_card(
             FpsOptimizationMode::AdamShaderSmooth,
-            "✨ 100-140 FPS",
-            "btn-secondary",
+            "✨ 100-140 FPS (CHIAROSCURO)",
+            "btn-cyan",
         );
         card2.set_hexpand(true);
         grid_row1.append(&card2);
@@ -110,8 +104,8 @@ impl PerformanceCenterView {
         // Mode 3: Balanced Edutainment
         let (card3, apply_balanced_btn) = Self::create_mode_card(
             FpsOptimizationMode::BalancedEdutainment,
-            "🎮 80-120 FPS",
-            "btn-secondary",
+            "🎮 80-120 FPS (HARMONIOUS)",
+            "btn-purple",
         );
         card3.set_hexpand(true);
         grid_row2.append(&card3);
@@ -119,8 +113,8 @@ impl PerformanceCenterView {
         // Mode 4: Battery Saver
         let (card4, apply_battery_saver_btn) = Self::create_mode_card(
             FpsOptimizationMode::BatterySaver,
-            "🔋 60 FPS LOCK",
-            "btn-secondary",
+            "🔋 60 FPS (NOCTURNE SAVER)",
+            "btn-emerald",
         );
         card4.set_hexpand(true);
         grid_row2.append(&card4);
@@ -165,7 +159,7 @@ impl PerformanceCenterView {
         card.append(&desc_lbl);
 
         let specs_info = format!(
-            "RAM: {} MB • Render: {} Chunks • Sim: {} Chunks • Target: {} FPS",
+            "RAM: {} MB • Render: {} Chunks • Simulation: {} Chunks • Target: {} FPS",
             mode.ram_mb(),
             mode.render_distance(),
             mode.simulation_distance(),
@@ -176,7 +170,7 @@ impl PerformanceCenterView {
         specs_lbl.set_halign(gtk4::Align::Start);
         card.append(&specs_lbl);
 
-        let apply_btn = Button::with_label("⚡ Apply This Mode");
+        let apply_btn = Button::with_label("⚔ Apply This Treatise");
         apply_btn.set_css_classes(&[btn_class]);
         apply_btn.set_margin_top(6);
         card.append(&apply_btn);

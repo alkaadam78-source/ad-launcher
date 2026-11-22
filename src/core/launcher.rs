@@ -37,9 +37,10 @@ impl LauncherCore {
     }
 
     pub fn get_active_account(&self) -> AccountProfile {
-        self.auth_manager
-            .load_active_account()
-            .unwrap_or_else(|| self.auth_manager.create_offline_profile(&self.settings.active_profile_name))
+        self.auth_manager.load_active_account().unwrap_or_else(|| {
+            self.auth_manager
+                .create_offline_profile(&self.settings.active_profile_name)
+        })
     }
 
     pub fn get_selected_instance(&self) -> Option<Instance> {
@@ -73,7 +74,10 @@ impl LauncherCore {
         let (is_ready, status_message) = if selected_instance.is_none() {
             (false, "No instance configured".to_string())
         } else if detected_java.is_none() {
-            (false, "No compatible Java 17+ 64-bit runtime found".to_string())
+            (
+                false,
+                "No compatible Java 17+ 64-bit runtime found".to_string(),
+            )
         } else {
             let inst = selected_instance.as_ref().unwrap();
             let v_jar = mc_dir
@@ -82,7 +86,10 @@ impl LauncherCore {
                 .join(format!("{}.jar", inst.mc_version));
 
             if !v_jar.exists() {
-                (false, format!("Minecraft {} is not downloaded", inst.mc_version))
+                (
+                    false,
+                    format!("Minecraft {} is not downloaded", inst.mc_version),
+                )
             } else {
                 (true, format!("Ready to Launch ({})", inst.name))
             }
@@ -106,7 +113,9 @@ impl LauncherCore {
         let account = self.get_active_account();
         let engine = MinecraftEngine::new(&self.settings.minecraft_dir);
 
-        let pid = engine.launch(&instance, &self.settings, &account, event_tx).await?;
+        let pid = engine
+            .launch(&instance, &self.settings, &account, event_tx)
+            .await?;
 
         // Update last played timestamp in database
         let _ = self.instance_manager.update_last_played(&instance.id);

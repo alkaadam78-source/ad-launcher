@@ -50,7 +50,11 @@ impl ModManager {
         if let Ok(entries) = fs::read_dir(&self.mods_dir) {
             for entry in entries.flatten() {
                 let path = entry.path();
-                let file_name = path.file_name().unwrap_or_default().to_string_lossy().to_string();
+                let file_name = path
+                    .file_name()
+                    .unwrap_or_default()
+                    .to_string_lossy()
+                    .to_string();
 
                 let (enabled, is_mod_file) = if file_name.ends_with(".jar") {
                     (true, true)

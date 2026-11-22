@@ -102,7 +102,10 @@ impl ModrinthClient {
         game_version: &str,
         loader: &str,
     ) -> Result<ModrinthVersion, String> {
-        let url = format!("{}/project/{}/version", MODRINTH_API_URL, project_id_or_slug);
+        let url = format!(
+            "{}/project/{}/version",
+            MODRINTH_API_URL, project_id_or_slug
+        );
         let resp = self
             .client
             .get(&url)
@@ -151,8 +154,7 @@ impl ModrinthClient {
         }
 
         let bytes = resp.bytes().await.map_err(|e| e.to_string())?;
-        std::fs::write(&dest_path, bytes)
-            .map_err(|e| format!("Failed to write mod jar: {}", e))?;
+        std::fs::write(&dest_path, bytes).map_err(|e| format!("Failed to write mod jar: {}", e))?;
 
         Ok(dest_path)
     }

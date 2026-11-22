@@ -1,15 +1,28 @@
+pub mod analytics;
 pub mod authentication;
+pub mod diagnostics;
 pub mod downloader;
+pub mod export;
 pub mod fps_booster;
+pub mod i18n;
+pub mod importer;
 pub mod instances;
 pub mod java;
+pub mod java_manager;
 pub mod launcher;
 pub mod manifest;
 pub mod minecraft;
 pub mod mods;
+pub mod modpack_validator;
+pub mod multiplayer;
+pub mod plugins;
 pub mod process;
 pub mod shaders;
+pub mod snapshots;
 pub mod storage;
+pub mod transfer;
+pub mod updater;
+pub mod world_studio;
 
 pub use fps_booster::{FpsBooster, FpsOptimizationMode};
 pub use launcher::{LauncherCore, LauncherStatus};

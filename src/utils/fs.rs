@@ -26,13 +26,16 @@ pub fn ensure_dir<P: AsRef<Path>>(dir: P) -> io::Result<()> {
 pub fn extract_zip<P: AsRef<Path>, D: AsRef<Path>>(archive_path: P, dest_dir: D) -> io::Result<()> {
     let file = File::open(archive_path)?;
     let reader = BufReader::new(file);
-    let mut archive = ZipArchive::new(reader).map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+    let mut archive =
+        ZipArchive::new(reader).map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
 
     let dest = dest_dir.as_ref();
     ensure_dir(dest)?;
 
     for i in 0..archive.len() {
-        let mut file = archive.by_index(i).map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+        let mut file = archive
+            .by_index(i)
+            .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
         let outpath = match file.enclosed_name() {
             Some(path) => dest.join(path),
             None => continue,

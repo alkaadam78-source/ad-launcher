@@ -139,7 +139,11 @@ impl Library {
                 let matches_os = match &rule.os {
                     Some(os) => {
                         let name_matches = os.name.as_deref() == Some("linux");
-                        let arch_matches = os.arch.as_deref().map(|a| a == "x86_64" || a == "x64").unwrap_or(true);
+                        let arch_matches = os
+                            .arch
+                            .as_deref()
+                            .map(|a| a == "x86_64" || a == "x64")
+                            .unwrap_or(true);
                         name_matches && arch_matches
                     }
                     None => true,

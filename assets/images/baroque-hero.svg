@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" width="100%" height="240">
+  <defs>
+    <radialGradient id="candle-glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#78582F" stop-opacity="0.45"/>
+      <stop offset="40%" stop-color="#30231D" stop-opacity="0.3"/>
+      <stop offset="80%" stop-color="#171210" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#100D0C" stop-opacity="0.98"/>
+    </radialGradient>
+    <linearGradient id="gold-stroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78582F" stop-opacity="0.2"/>
+      <stop offset="25%" stop-color="#B08A48"/>
+      <stop offset="50%" stop-color="#E3D0A6"/>
+      <stop offset="75%" stop-color="#B08A48"/>
+      <stop offset="100%" stop-color="#78582F" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="burgundy-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#91445A" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#6B2638" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#421923" stop-opacity="0.3"/>
+    </linearGradient>
+    <pattern id="classical-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 40 M 0 0 L 40 40" fill="none" stroke="#78582F" stroke-width="0.3" opacity="0.1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="900" height="240" fill="#100D0C"/>
+  <rect width="900" height="240" fill="url(#candle-glow)"/>
+  <rect width="900" height="240" fill="url(#classical-grid)"/>
+  <rect width="900" height="240" fill="url(#burgundy-accent)"/>
+
+  <!-- Ornamental Frame Borders -->
+  <rect x="8" y="8" width="884" height="224" rx="4" fill="none" stroke="#78582F" stroke-width="1" opacity="0.6"/>
+  <rect x="14" y="14" width="872" height="212" rx="2" fill="none" stroke="#B08A48" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Baroque Arches in Background -->
+  <path d="M 120 230 C 120 120, 220 70, 450 70 C 680 70, 780 120, 780 230" fill="none" stroke="url(#gold-stroke)" stroke-width="1.5" opacity="0.35"/>
+  <path d="M 160 230 C 160 140, 260 95, 450 95 C 640 95, 740 140, 740 230" fill="none" stroke="#78582F" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.3"/>
+
+  <!-- Corner Flourishes -->
+  <path d="M 18 36 C 18 24, 24 18, 36 18" stroke="#D6B675" stroke-width="1.5" fill="none"/>
+  <circle cx="36" cy="18" r="2" fill="#D6B675"/>
+  <circle cx="18" cy="36" r="2" fill="#D6B675"/>
+
+  <path d="M 882 36 C 882 24, 876 18, 864 18" stroke="#D6B675" stroke-width="1.5" fill="none"/>
+  <circle cx="864" cy="18" r="2" fill="#D6B675"/>
+  <circle cx="882" cy="36" r="2" fill="#D6B675"/>
+
+  <path d="M 18 204 C 18 216, 24 222, 36 222" stroke="#D6B675" stroke-width="1.5" fill="none"/>
+  <circle cx="36" cy="222" r="2" fill="#D6B675"/>
+  <circle cx="18" cy="204" r="2" fill="#D6B675"/>
+
+  <path d="M 882 204 C 882 216, 876 222, 864 222" stroke="#D6B675" stroke-width="1.5" fill="none"/>
+  <circle cx="864" cy="222" r="2" fill="#D6B675"/>
+  <circle cx="882" cy="204" r="2" fill="#D6B675"/>
+
+  <!-- Central Crest Ornament Behind Title -->
+  <circle cx="450" cy="100" r="48" fill="none" stroke="#78582F" stroke-width="0.8" opacity="0.3"/>
+  <polygon points="450,56 454,64 462,64 456,70 458,78 450,74 442,78 444,70 438,64 446,64" fill="#D6B675" opacity="0.5"/>
+
+  <!-- Gilded Divider Line -->
+  <path d="M 240 162 H 660" stroke="url(#gold-stroke)" stroke-width="1"/>
+  <circle cx="450" cy="162" r="3.5" fill="#D6B675"/>
+  <polygon points="450,156 454,162 450,168 446,162" fill="#E3D0A6"/>
+  <circle cx="380" cy="162" r="2" fill="#B08A48"/>
+  <circle cx="520" cy="162" r="2" fill="#B08A48"/>
+
+  <!-- Subtitle Tagline -->
+  <text x="450" y="186" font-family="'Cormorant Garamond', 'Garamond', 'Georgia', serif" font-size="14" font-style="italic" fill="#B6A793" text-anchor="middle" letter-spacing="3">EUROPEAN BAROQUE × NATIVE GTK4 MASTERY</text>
+  <text x="450" y="208" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#B08A48" text-anchor="middle" letter-spacing="2">CURATED FOR DEBIAN LINUX • ARCHIVE EDITION</text>
+</svg>

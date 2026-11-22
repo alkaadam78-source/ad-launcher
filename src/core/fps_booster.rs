@@ -78,7 +78,10 @@ impl FpsBooster {
 
     pub fn apply_mode(&self, mode: FpsOptimizationMode) -> Result<String, String> {
         let options_path = self.minecraft_dir.join("options.txt");
-        let sodium_path = self.minecraft_dir.join("config").join("sodium-options.json");
+        let sodium_path = self
+            .minecraft_dir
+            .join("config")
+            .join("sodium-options.json");
         let iris_path = self.minecraft_dir.join("config").join("iris.properties");
 
         // 1. Update options.txt
@@ -88,13 +91,31 @@ impl FpsBooster {
             String::new()
         };
 
-        Self::upsert_option(&mut options_content, "renderDistance", &mode.render_distance().to_string());
-        Self::upsert_option(&mut options_content, "simulationDistance", &mode.simulation_distance().to_string());
+        Self::upsert_option(
+            &mut options_content,
+            "renderDistance",
+            &mode.render_distance().to_string(),
+        );
+        Self::upsert_option(
+            &mut options_content,
+            "simulationDistance",
+            &mode.simulation_distance().to_string(),
+        );
         Self::upsert_option(&mut options_content, "maxFps", &mode.max_fps().to_string());
         Self::upsert_option(&mut options_content, "enableVsync", "false");
         Self::upsert_option(&mut options_content, "graphicsMode", "0");
         Self::upsert_option(&mut options_content, "renderClouds", "\"false\"");
-        Self::upsert_option(&mut options_content, "particles", if mode == FpsOptimizationMode::AdamHyperPotato || mode == FpsOptimizationMode::BatterySaver { "2" } else { "1" });
+        Self::upsert_option(
+            &mut options_content,
+            "particles",
+            if mode == FpsOptimizationMode::AdamHyperPotato
+                || mode == FpsOptimizationMode::BatterySaver
+            {
+                "2"
+            } else {
+                "1"
+            },
+        );
 
         fs::write(&options_path, options_content)
             .map_err(|e| format!("Failed to update options.txt: {}", e))?;
@@ -140,7 +161,11 @@ impl FpsBooster {
              maxShadowRenderDistance={}\n\
              shaderPack=miniature-shader-2.19.zip\n\
              enableShaders={}\n",
-            if mode == FpsOptimizationMode::AdamHyperPotato { 4 } else { 8 },
+            if mode == FpsOptimizationMode::AdamHyperPotato {
+                4
+            } else {
+                8
+            },
             enable_shader
         );
         let _ = fs::write(&iris_path, shader_content);
